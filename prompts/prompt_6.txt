@@ -1,0 +1,263 @@
+# TASK: Upgrade Existing NearHire AI Project to LangGraph Agent Architecture
+
+IMPORTANT:
+Do NOT rebuild the project.
+Do NOT change the frontend or Node.js backend.
+Refactor ONLY the existing Python FastAPI backend.
+
+The project currently has:
+
+- React + Vite frontend
+- Node.js + Express backend (Authentication, Jobs, PostgreSQL)
+- FastAPI backend (Resume Parser, Skill Extractor, Matching Engine, Gemini Integration)
+
+The Python backend currently performs the workflow manually.
+
+Current Flow:
+
+Upload Resume
+    ↓
+Resume Parser
+    ↓
+Skill Extractor
+    ↓
+Fetch Jobs from Node Backend
+    ↓
+Job Matching
+    ↓
+Generate Interview Questions
+    ↓
+Generate Learning Roadmap
+    ↓
+Generate Cover Letter
+
+I want to convert this workflow into a LangGraph-based Agent without changing the business logic.
+
+==========================================
+REQUIREMENTS
+==========================================
+
+1. Install and configure
+
+- langgraph
+- langchain
+- langchain-google-genai
+
+Use my existing Gemini API Key.
+
+Do NOT change the Gemini prompts unless necessary.
+
+==========================================
+PROJECT STRUCTURE
+==========================================
+
+Create a new folder
+
+app/
+    graph/
+        state.py
+        nodes.py
+        workflow.py
+
+Keep all existing folders unchanged.
+
+==========================================
+STATE
+==========================================
+
+Create a shared AgentState containing
+
+- resume_text
+- extracted_skills
+- jobs
+- matched_jobs
+- selected_job
+- interview_questions
+- roadmap
+- cover_letter
+- resume_feedback
+- checklist
+
+Use TypedDict.
+
+==========================================
+NODES
+==========================================
+
+Convert every existing service into a LangGraph node.
+
+DO NOT rewrite the logic.
+
+Wrap the existing services.
+
+Example
+
+parse_resume_node()
+
+should internally call the existing resume parser.
+
+extract_skills_node()
+
+should call the existing skill extractor.
+
+fetch_jobs_node()
+
+should use the existing node_client.py
+
+match_jobs_node()
+
+should call the existing matching_service.py
+
+generate_questions_node()
+
+should call the existing Gemini service.
+
+generate_roadmap_node()
+
+should reuse the existing prompt.
+
+generate_cover_letter_node()
+
+should reuse the existing prompt.
+
+generate_resume_feedback_node()
+
+should reuse existing implementation.
+
+generate_checklist_node()
+
+should reuse existing implementation.
+
+==========================================
+LANGGRAPH WORKFLOW
+==========================================
+
+Build the graph like this
+
+START
+
+↓
+
+Parse Resume
+
+↓
+
+Extract Skills
+
+↓
+
+Fetch Jobs
+
+↓
+
+Match Jobs
+
+↓
+
+Generate Resume Feedback
+
+↓
+
+Generate Interview Questions
+
+↓
+
+Generate Learning Roadmap
+
+↓
+
+Generate Cover Letter
+
+↓
+
+Generate Preparation Checklist
+
+↓
+
+END
+
+Compile the graph.
+
+==========================================
+FASTAPI
+==========================================
+
+Replace manual orchestration.
+
+Instead of calling
+
+parse_resume()
+
+extract_skills()
+
+fetch_jobs()
+
+match_jobs()
+
+etc.
+
+Call
+
+graph.invoke(initial_state)
+
+Return the final state as API response.
+
+==========================================
+DATABASE
+==========================================
+
+Do NOT modify PostgreSQL.
+
+Continue fetching jobs through the existing Node.js REST APIs.
+
+Never connect FastAPI directly to PostgreSQL.
+
+==========================================
+FRONTEND
+==========================================
+
+Do NOT modify the frontend.
+
+Existing APIs should continue working.
+
+==========================================
+ERROR HANDLING
+==========================================
+
+If one node fails
+
+- catch exception
+- log error
+- return meaningful API response
+
+Do not crash the graph.
+
+==========================================
+LOGGING
+==========================================
+
+Add logging for every node
+
+Entering Parse Resume Node...
+
+Skills Extracted...
+
+Jobs Retrieved...
+
+Matching Completed...
+
+Interview Questions Generated...
+
+Workflow Finished...
+
+==========================================
+GOAL
+==========================================
+
+Convert the existing FastAPI backend into a production-ready LangGraph Agent Architecture while preserving all existing functionality and API endpoints.
+
+Do not remove any existing features.
+
+Only refactor the orchestration layer.
+
+Keep the code clean, modular, scalable, and interview-ready.

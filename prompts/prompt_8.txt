@@ -1,0 +1,39 @@
+Add a professional Dark/Light theme toggle to the NearHire AI project.
+
+Requirements:
+
+1. Add a theme toggle button at the top-right corner of the Navbar.
+2. Use Tailwind CSS dark mode with the "class" strategy.
+3. Save the selected theme in localStorage.
+4. Restore the saved theme automatically when the app loads.
+5. If no preference exists, detect the user's system theme.
+6. Animate the theme transition smoothly (200–300ms).
+7. Use Moon and Sun icons from lucide-react.
+8. The button should have:
+   - rounded-full shape
+   - subtle shadow
+   - hover animation
+   - icon rotation animation
+9. Apply dark mode throughout the application:
+   - background
+   - cards
+   - navbar
+   - sidebar
+   - buttons
+   - forms
+   - inputs
+   - modals
+   - dropdowns
+   - tables
+   - text colors
+10. Preserve the existing purple branding.
+11. Use semantic Tailwind classes such as:
+    bg-white dark:bg-zinc-900
+    text-zinc-900 dark:text-white
+    border-zinc-200 dark:border-zinc-700
+12. Avoid hardcoded colors whenever possible.
+13. Create a reusable ThemeProvider using React Context.
+14. Create a reusable ThemeToggle component.
+15. Wrap the entire application with ThemeProvider.
+16. Ensure no page flashes the wrong theme during refresh.
+17. The implementation should be production-ready and responsive.

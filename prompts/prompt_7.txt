@@ -1,0 +1,215 @@
+You are a Senior Full Stack Engineer.
+
+I have an existing project that currently uses raw SQL scripts for the database.
+
+Current folder structure:
+
+database/
+├── database/
+│   └── README.sql
+├── docs/
+├── frontend/
+└── ...
+
+I want to completely migrate this project to Drizzle ORM with PostgreSQL while keeping all existing backend APIs working.
+
+## Requirements
+
+1. Remove dependency on raw SQL files.
+2. Use Drizzle ORM as the only database layer.
+3. Use PostgreSQL.
+4. Create a clean database folder structure.
+
+New structure:
+
+backend/
+└── src/
+    ├── db/
+    │   ├── index.ts
+    │   ├── schema.ts
+    │   ├── relations.ts
+    │   ├── seed.ts
+    │   └── migrations/
+    ├── services/
+    ├── controllers/
+    ├── routes/
+    └── ...
+
+Create these configuration files:
+
+drizzle.config.ts
+
+.env
+
+package.json scripts
+
+## Install Required Packages
+
+drizzle-orm
+drizzle-kit
+postgres
+dotenv
+
+## Environment Variables
+
+DATABASE_URL=
+
+## Database Connection
+
+Create a reusable Drizzle client.
+
+Example:
+
+db/index.ts
+
+- Load env
+- Create postgres client
+- Export drizzle(db)
+
+## Schema
+
+Convert every existing SQL table into Drizzle schema.
+
+Use
+
+pgTable()
+
+varchar()
+
+text()
+
+integer()
+
+timestamp()
+
+boolean()
+
+serial()
+
+uuid()
+
+primaryKey()
+
+foreignKey()
+
+defaultNow()
+
+notNull()
+
+unique()
+
+indexes
+
+## Relations
+
+Create proper one-to-one
+
+one-to-many
+
+many-to-many
+
+relations.
+
+## Migrations
+
+Generate migration files using drizzle-kit.
+
+Provide scripts:
+
+npm run db:generate
+
+npm run db:migrate
+
+npm run db:push
+
+npm run db:studio
+
+## Refactor Backend
+
+Replace every
+
+SELECT
+
+INSERT
+
+UPDATE
+
+DELETE
+
+raw SQL query with Drizzle ORM queries.
+
+Example:
+
+Old:
+
+SELECT * FROM users WHERE id = ?
+
+New:
+
+await db.select().from(users).where(eq(users.id,id));
+
+Do this for every service.
+
+## Validation
+
+Keep existing API responses unchanged.
+
+Do not change frontend.
+
+Do not change routes.
+
+Only replace database implementation.
+
+## Seed
+
+Create seed.ts with sample:
+
+Users
+
+Companies
+
+Jobs
+
+Applications
+
+## Error Handling
+
+Use try/catch.
+
+Return proper errors.
+
+## Transactions
+
+Use Drizzle transactions where multiple inserts/updates occur.
+
+## Documentation
+
+Generate README explaining:
+
+Installation
+
+Migration
+
+Folder structure
+
+Commands
+
+How to add new tables
+
+How to run migrations
+
+How to use Drizzle Studio
+
+## Code Quality
+
+Use TypeScript.
+
+Use modular architecture.
+
+Avoid duplicate code.
+
+Use repository/service pattern where appropriate.
+
+Keep the project production-ready.
+
+Finally, remove every dependency on README.sql and migrate all database logic to Drizzle ORM.

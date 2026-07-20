@@ -1,0 +1,393 @@
+You are a senior Full Stack + AI + Backend engineer.
+
+Upgrade my existing NearHire AI project into a production-ready AI Career Coach and Hyperlocal Job Discovery Platform.
+
+DO NOT create a new project.
+Refactor and improve the existing codebase.
+
+====================================================
+PRIMARY GOAL
+====================================================
+
+Remove every piece of dummy data from the project.
+
+Replace hardcoded jobs, companies, recommendations, dashboards and statistics with real database-driven data.
+
+The platform should work with real jobs collected automatically from public APIs and publicly accessible company career pages (where permitted).
+
+====================================================
+AI CAREER COACH
+====================================================
+
+Build a complete AI Career Coach powered by Gemini.
+
+Features:
+
+• AI Career Chat
+• Resume ATS Analysis
+• Resume Parsing
+• Resume Improvement Suggestions
+• Resume Rewrite
+• Resume Bullet Enhancement
+• Resume Score
+• Skill Gap Analysis
+• Personalized Career Roadmap
+• Learning Recommendations
+• Course Recommendations
+• Project Recommendations
+• Company Research
+• Cover Letter Generator
+• Job Match Explanation
+• Interview Preparation
+• Technical Interview Questions
+• HR Interview Questions
+• Company Specific Questions
+• Mock Interview
+• Salary Guidance
+• Career Growth Suggestions
+• Daily Career Tips
+• Weekly Progress Report
+
+Maintain conversation history for each user.
+
+====================================================
+REAL JOB DISCOVERY\
+====================================================
+
+Replace dummy jobs with real jobs.
+
+Create a dedicated Job Collection Service.
+
+Prefer official APIs wherever possible.
+
+Supported APIs:
+
+• JSearch API (RapidAPI)
+• Adzuna API
+• Arbeitnow API
+• Remotive API
+• Greenhouse Job Board API
+• Lever Job Board API
+
+If no API exists for a company:
+
+Create scraping modules ONLY for publicly accessible career pages that permit crawling.
+
+Examples:
+
+company.com/careers
+
+company.com/jobs
+
+Greenhouse
+
+Lever
+
+Ashby
+
+Extract:
+
+Job Title
+
+Company
+
+Location
+
+Latitude
+
+Longitude
+
+Salary
+
+Experience
+
+Employment Type
+
+Remote / Hybrid / Onsite
+
+Description
+
+Skills
+
+Education
+
+Company Logo
+
+Posted Date
+
+Application URL
+
+Industry
+
+Category
+
+Source
+
+====================================================
+LOCAL JOB SEARCH
+====================================================
+
+This platform focuses on INDIA.
+
+Allow search using:
+
+• Current GPS Location
+• City
+• District
+• State
+• PIN Code
+
+Support radius search:
+
+5 km
+
+10 km
+
+20 km
+
+50 km
+
+100 km
+
+Use:
+
+Leaflet
+
+OpenStreetMap
+
+Nominatim
+
+Haversine Formula
+
+Sort jobs by nearest distance.
+
+====================================================
+SCRAPER SERVICE
+====================================================
+
+Create a separate microservice responsible for:
+
+Collecting jobs
+
+Cleaning data
+
+Removing duplicates
+
+Normalizing locations
+
+Geocoding
+
+Updating existing jobs
+
+Deleting expired jobs
+
+Logging scraping history
+
+Use BullMQ or node-cron for scheduled updates every hour.
+
+Implement retry logic and rate limiting.
+
+Respect robots.txt and website terms. Prefer official APIs whenever available.
+
+====================================================
+DATABASE
+====================================================
+
+Use PostgreSQL + Drizzle ORM.
+
+Tables:
+
+Users
+
+Companies
+
+Jobs
+
+Applications
+
+Bookmarks
+
+Skills
+
+Resume
+
+ResumeSkills
+
+InterviewSessions
+
+CareerGoals
+
+LearningPlans
+
+Notifications
+
+AIChats
+
+ScrapeLogs
+
+JobSources
+
+====================================================
+AI JOB MATCHING
+====================================================
+
+Generate a Match Score.
+
+Explain:
+
+Matched Skills
+
+Missing Skills
+
+Experience Match
+
+Education Match
+
+Distance Score
+
+Salary Match
+
+Resume Strength
+
+Show WHY each score is generated.
+
+====================================================
+DASHBOARD
+====================================================
+
+Replace dummy cards.
+
+Show:
+
+Nearby Jobs
+
+Resume Score
+
+Applications
+
+Saved Jobs
+
+Interview Readiness
+
+Learning Progress
+
+Career Goals
+
+Skill Progress
+
+AI Suggestions
+
+Upcoming Interviews
+
+Recent AI Chats
+
+Everything should be dynamic from the database.
+
+====================================================
+RESUME ANALYSIS PERFORMANCE
+====================================================
+
+Current issue:
+Resume analysis is slow.
+
+Optimize it.
+
+Requirements:
+
+• Parse PDF only once.
+
+• Cache extracted resume text in PostgreSQL.
+
+• Cache AI analysis results in Redis.
+
+• Do NOT call Gemini repeatedly for the same resume.
+
+• Split processing into:
+    1. Resume Parsing
+    2. Skill Extraction
+    3. ATS Analysis
+    4. AI Suggestions
+
+Run independent tasks in parallel where possible.
+
+Use asynchronous processing.
+
+Show loading states with progress steps:
+
+Uploading Resume...
+
+Extracting Text...
+
+Analyzing Skills...
+
+Calculating ATS Score...
+
+Generating Suggestions...
+
+Complete.
+
+Target analysis time:
+
+Less than 3 seconds for cached resumes.
+
+Less than 8 seconds for new resumes.
+
+====================================================
+FRONTEND
+====================================================
+
+Improve UI.
+
+Premium SaaS design.
+
+Glassmorphism.
+
+Floating Cards.
+
+Smooth animations.
+
+Modern dashboard.
+
+Dark mode.
+
+Better spacing.
+
+Responsive.
+
+Replace every placeholder with live data.
+
+====================================================
+CODE QUALITY
+====================================================
+
+Use clean architecture.
+
+Separate:
+
+Routes
+
+Controllers
+
+Services
+
+Repositories
+
+Schedulers
+
+Scraper Service
+
+AI Service
+
+Utilities
+
+Middlewares
+
+Avoid duplicated code.
+
+Use TypeScript best practices where applicable.
+
+====================================================
+FINAL GOAL
+====================================================
+
+Deliver a production-ready AI Career Coach + Hyperlocal Job Discovery Platform with real job listings, AI-powered career guidance, optimized resume analysis, scalable backend architecture, and a premium modern UI.

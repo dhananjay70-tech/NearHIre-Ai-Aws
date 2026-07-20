@@ -1,0 +1,828 @@
+Continue working inside the existing NearHire.AI monorepo.
+
+IMPORTANT CURRENT STATE — PRESERVE IT
+
+The following are already working and must not be recreated, deleted or unnecessarily rewritten:
+
+- React + Vite frontend on port 5173
+- Node.js + Express backend on port 5001
+- Python FastAPI backend on port 8000
+- PostgreSQL database nearhire_db
+- JWT cookie authentication
+- Registration, login, logout and protected routes
+- users and user_preferences tables
+- companies, jobs, skills and job_skills tables
+- 12 seeded companies
+- 35 seeded jobs
+- 25 skills and 201 job-skill mappings
+- GET /api/jobs
+- GET /api/jobs/nearby
+- GET /api/jobs/:id
+- GET /api/companies
+- GET /api/skills
+- SearchJobsPage connected to the real Node API
+- Existing repository, service, controller and route layers
+
+Several backend files were manually repaired after code-generation formatting errors. Do not rewrite these working files unless a change is strictly required:
+
+- node-backend/src/database/seedDatabase.js
+- node-backend/src/repositories/jobRepository.js
+- node-backend/src/repositories/companyRepository.js
+- node-backend/src/repositories/skillRepository.js
+- node-backend/src/services/jobService.js
+- node-backend/src/services/companyService.js
+- node-backend/src/services/skillService.js
+- node-backend/src/controllers/jobController.js
+- node-backend/src/middleware/roleMiddleware.js
+- node-backend/src/utils/distance.js
+- node-backend/src/utils/apiResponse.js
+- frontend/src/pages/SearchJobsPage.jsx
+- frontend/src/services/coreApi.js
+- frontend/src/services/jobService.js
+
+Before editing:
+1. Inspect the current implementation.
+2. Reuse existing response formats and naming conventions.
+3. Modify only what is necessary.
+4. Never replace a working file with a shorter placeholder.
+5. Do not output code merely for the user to copy. Edit the project files directly.
+6. Run syntax/build checks after implementation.
+7. Fix all syntax errors before claiming completion.
+8. Use JavaScript in React and Node. Use Python in FastAPI.
+9. Do not use TypeScript.
+
+==================================================
+OBJECTIVE
+==================================================
+
+Complete the locally working Milestone 3 version of NearHire.AI.
+
+The complete user journey must work locally:
+
+Register/Login
+→ Search and filter jobs
+→ Use GPS and radius search
+→ View jobs in list and map view
+→ Open complete job details
+→ Save a job
+→ Record and track an application
+→ Upload a real PDF resume
+→ Python extracts resume text and skills
+→ Python fetches jobs from Node
+→ Calculate deterministic match scores
+→ Display recommended jobs, matched skills and missing skills
+→ Generate AI career assistance
+→ View all activity in dashboard
+
+Do not implement fake button behaviour. Every important button must call a real API or perform a real navigation action.
+
+==================================================
+PART 1 — FIX SEARCH PAGE BEHAVIOUR
+==================================================
+
+Inspect the existing SearchJobsPage.
+
+Requirements:
+
+- Preserve its current working API integration.
+- Ensure Clear Filters immediately reloads all jobs.
+- Location permission denial must not block normal city search.
+- Radius selector is enabled only when coordinates are available.
+- Search filters should use AND behaviour intentionally.
+- Display a helpful explanation when zero jobs match multiple filters.
+- Add List / Map toggle.
+- Add manual latitude and longitude fallback inputs inside an expandable section.
+- Add a visible “Demo Dataset” source label for seeded jobs.
+- Do not call companies or skills APIs unless needed.
+- Use existing jobService functions.
+
+Do not hardcode frontend job arrays.
+
+==================================================
+PART 2 — LEAFLET MAP
+==================================================
+
+Install if missing:
+
+- leaflet
+- react-leaflet
+
+Create or complete:
+
+frontend/src/components/map/JobMap.jsx
+frontend/src/utils/leafletIcons.js
+
+Requirements:
+
+- OpenStreetMap tiles
+- Job markers from the real jobs API
+- User-location marker when GPS coordinates exist
+- Radius circle using selected radius
+- Marker popup:
+  - job title
+  - company name
+  - city
+  - distance when available
+  - View Details link
+- Automatically fit visible markers
+- Ignore jobs without valid coordinates
+- Fix default Leaflet marker icon issue in Vite
+- Responsive height
+- Do not crash when jobs array is empty
+- Import Leaflet CSS once in the correct frontend entry file
+
+Add Map/List toggle in SearchJobsPage.
+
+==================================================
+PART 3 — COMPLETE JOB DETAILS
+==================================================
+
+Complete:
+
+frontend/src/pages/JobDetailsPage.jsx
+
+Use:
+
+GET /api/jobs/:id
+
+Display:
+
+- title
+- verified company
+- company website
+- description
+- requirements
+- complete location
+- distance when coordinates were provided
+- salary
+- experience
+- job type
+- work mode
+- posted date
+- required skills
+- preferred skills
+- source name and source label
+- official application link
+
+Buttons:
+
+1. Save Job
+   - Calls real saved-job API.
+   - Handles duplicate saves clearly.
+
+2. Apply on Official Website
+   - First records an application in NearHire.AI.
+   - Then opens applicationUrl in a new tab.
+   - Clearly tell the user that application submission occurs on the official source.
+
+3. Analyze Resume for This Job
+   - Navigate to /resume with the selected job ID in route state or query parameters.
+
+Add loading, error and not-found states.
+
+==================================================
+PART 4 — SAVED JOBS DATABASE AND NODE APIs
+==================================================
+
+Extend PostgreSQL schema idempotently.
+
+Create saved_jobs:
+
+- id UUID PK default gen_random_uuid()
+- user_id UUID not null references users(id) on delete cascade
+- job_id UUID not null references jobs(id) on delete cascade
+- created_at timestamp default current_timestamp
+- unique(user_id, job_id)
+
+Add indexes for user_id and job_id.
+
+Create Node layers following the existing architecture:
+
+- repository
+- service
+- controller
+- routes
+- validation where needed
+
+Endpoints:
+
+POST /api/saved-jobs/:jobId
+GET /api/saved-jobs
+DELETE /api/saved-jobs/:jobId
+
+All routes protected.
+
+Requirements:
+
+- Use req.user.userId.
+- Duplicate save returns a readable 409 or returns existing state safely.
+- GET response includes complete formatted job-card data.
+- Use parameterized queries.
+- Preserve standard response format.
+
+Complete:
+
+frontend/src/pages/SavedJobsPage.jsx
+
+Features:
+
+- Fetch real saved jobs
+- Open job details
+- Remove saved job
+- Loading, error and empty states
+
+==================================================
+PART 5 — APPLICATION TRACKER
+==================================================
+
+Extend schema idempotently.
+
+Create applications:
+
+- id UUID PK default gen_random_uuid()
+- user_id UUID not null references users(id) on delete cascade
+- job_id UUID not null references jobs(id) on delete cascade
+- status VARCHAR(30) not null default 'APPLIED'
+- notes TEXT
+- applied_at timestamp default current_timestamp
+- updated_at timestamp default current_timestamp
+- unique(user_id, job_id)
+
+Allowed status:
+
+- APPLIED
+- INTERVIEW
+- REJECTED
+- OFFER
+- WITHDRAWN
+
+Add indexes and updated_at trigger.
+
+Node endpoints:
+
+POST /api/applications
+GET /api/applications
+PATCH /api/applications/:id
+DELETE /api/applications/:id
+
+POST body:
+
+{
+  "jobId": "...",
+  "status": "APPLIED",
+  "notes": ""
+}
+
+Requirements:
+
+- Protected routes
+- Users can access only their own records
+- Duplicate applications handled safely
+- PATCH permits only status and notes
+- Return job and company details with each application
+
+Complete:
+
+frontend/src/pages/ApplicationsPage.jsx
+
+Features:
+
+- List tracked applications
+- Filter by status
+- Update status
+- Add/edit notes
+- Delete tracker record after confirmation
+- Open job details
+- Loading, error and empty states
+
+==================================================
+PART 6 — DASHBOARD
+==================================================
+
+Create Node endpoint:
+
+GET /api/dashboard
+
+Protected.
+
+Return:
+
+- savedJobsCount
+- applicationsCount
+- interviewsCount
+- offersCount
+- recentApplications
+- recently saved jobs
+- latest recommended jobs where available
+
+Complete:
+
+frontend/src/pages/DashboardPage.jsx
+
+Display:
+
+- four statistics cards
+- recent applications
+- saved jobs
+- quick links:
+  - Search Jobs
+  - Upload Resume
+  - View Recommendations
+  - Track Applications
+
+Use real APIs only.
+
+==================================================
+PART 7 — PYTHON RESUME SERVICE
+==================================================
+
+Use the existing FastAPI backend.
+
+Install/use:
+
+- fastapi
+- uvicorn
+- python-multipart
+- pydantic
+- httpx
+- pymupdf
+- python-dotenv
+
+Create clean modules:
+
+python-backend/app/api/resume.py
+python-backend/app/api/recommendations.py
+python-backend/app/api/agent.py
+
+python-backend/app/services/resume_parser.py
+python-backend/app/services/skill_extractor.py
+python-backend/app/services/matching_service.py
+python-backend/app/services/node_client.py
+python-backend/app/services/gemini_service.py
+
+python-backend/app/models/schemas.py
+
+Do not break existing health endpoints or Swagger docs.
+
+Resume rules:
+
+- PDF only for current version
+- maximum 5 MB
+- reject empty or corrupted PDF
+- do not permanently store raw PDF by default
+- extract text using PyMuPDF
+- return readable errors
+
+Skill extraction must be hybrid:
+
+1. Deterministic normalized skill dictionary for reliability
+2. Optional Gemini enrichment when GEMINI_API_KEY is available
+
+Include aliases such as:
+
+- react, react.js, reactjs
+- node, node.js, nodejs
+- express, express.js
+- postgres, postgresql
+- js, javascript
+- html, css
+- python, fastapi, django
+- mongodb, redis
+- docker, kubernetes, aws
+- git, github
+- sql
+- pandas, numpy
+- selenium, jest
+- c++, dsa
+- rest api, graphql
+
+Do not make the core workflow depend entirely on Gemini.
+
+==================================================
+PART 8 — PYTHON AUTHENTICATION
+==================================================
+
+Python endpoints must accept the same JWT used by Node.
+
+Read token from:
+
+1. Authorization Bearer token
+2. nearhire_token cookie
+
+Use the same JWT_SECRET environment variable.
+
+Validate userId and role.
+
+Do not create a second login system.
+
+Enable credentials-based CORS for:
+
+http://localhost:5173
+
+==================================================
+PART 9 — RESUME ENDPOINTS
+==================================================
+
+Implement:
+
+POST /api/resume/analyze
+
+Multipart form:
+
+- file: PDF
+- optional jobId
+
+Return:
+
+{
+  "success": true,
+  "data": {
+    "fileName": "...",
+    "summary": "...",
+    "extractedSkills": [],
+    "education": [],
+    "experienceHints": [],
+    "projects": [],
+    "selectedJobMatch": null or {}
+  }
+}
+
+If jobId is supplied:
+
+- Python fetches that job from Node internal/public job endpoint.
+- Calculate match immediately.
+
+Do not invent education or experience values when extraction is uncertain.
+
+==================================================
+PART 10 — DETERMINISTIC MATCHING ENGINE
+==================================================
+
+Implement match scoring in Python logic, not as a random LLM score.
+
+For each job:
+
+- required skill coverage: 60%
+- preferred skill coverage: 15%
+- distance score: 15% when user coordinates exist
+- user preference compatibility: 10%
+
+When distance or preference data is unavailable, redistribute the available weights proportionally or clearly state which components were omitted.
+
+Return:
+
+- overallScore from 0 to 100
+- requiredSkillScore
+- preferredSkillScore
+- distanceScore where available
+- preferenceScore where available
+- matchedSkills
+- missingRequiredSkills
+- missingPreferredSkills
+- explanation
+- scoreBreakdown
+
+Matching must be deterministic for the same input.
+
+==================================================
+PART 11 — RECOMMENDATION ENDPOINT
+==================================================
+
+Implement:
+
+POST /api/recommendations/jobs
+
+Accept:
+
+- extractedSkills or resume analysis ID/context
+- optional user latitude
+- optional user longitude
+- optional radiusKm
+- optional job filters
+- limit default 10
+
+Workflow:
+
+1. Validate JWT.
+2. Fetch jobs from Node backend.
+3. Calculate deterministic match for each job.
+4. Rank by overall score.
+5. Return top jobs.
+6. Include original job details and score breakdown.
+
+Python → Node communication must use environment variable:
+
+NODE_BACKEND_URL=http://localhost:5001/api
+
+Use httpx with timeout and readable service-unavailable errors.
+
+==================================================
+PART 12 — AI CAREER ASSISTANT
+==================================================
+
+Gemini is optional but supported.
+
+Environment:
+
+GEMINI_API_KEY=
+GEMINI_MODEL=
+
+Never hardcode API keys or a model name.
+
+When GEMINI_API_KEY is absent:
+
+- Resume parsing must still work.
+- Skill extraction must still work.
+- Deterministic matching must still work.
+- Return a clear message that generative assistance is unavailable.
+
+Endpoints:
+
+POST /api/agent/interview-questions
+POST /api/agent/learning-roadmap
+POST /api/agent/cover-letter
+POST /api/agent/resume-feedback
+
+Inputs should use actual resume/job context.
+
+Outputs:
+
+Interview questions:
+- technical
+- project-based
+- behavioural
+
+Learning roadmap:
+- based on missing required skills
+- prioritized
+- realistic timeline
+
+Cover letter:
+- job-specific
+- concise
+- no invented experience
+
+Resume feedback:
+- strengths
+- missing keywords
+- improvement suggestions
+- do not claim an ATS guarantee
+
+Add timeout and AI failure handling.
+
+==================================================
+PART 13 — RESUME FRONTEND
+==================================================
+
+Complete:
+
+frontend/src/pages/ResumePage.jsx
+
+Features:
+
+- PDF drag-and-drop and file picker
+- 5 MB validation
+- selected filename
+- optional selected job context
+- upload progress/loading state
+- extracted skills display
+- resume summary
+- selected-job match score
+- matched skills
+- missing skills
+- error states
+- Analyze and Recommend Jobs button
+
+Create/update:
+
+frontend/src/services/aiApi.js
+frontend/src/services/resumeService.js
+frontend/src/services/recommendationService.js
+
+Use:
+
+VITE_AI_API_URL=http://localhost:8000/api
+
+withCredentials: true
+
+==================================================
+PART 14 — RECOMMENDATIONS FRONTEND
+==================================================
+
+Complete:
+
+frontend/src/pages/RecommendationsPage.jsx
+
+Display:
+
+- ranked recommended jobs
+- overall match score
+- score breakdown
+- matched skills
+- missing required skills
+- missing preferred skills
+- reason for recommendation
+- distance where available
+- View Job
+- Save Job
+- Generate Interview Questions
+- Generate Learning Roadmap
+- Generate Cover Letter
+
+Do not display a match score if no resume analysis has occurred.
+
+==================================================
+PART 15 — BASIC AGENTIC WORKFLOW
+==================================================
+
+Implement a real multi-step workflow:
+
+User goal:
+“Find the best nearby jobs for my resume and prepare me for the selected job.”
+
+Steps:
+
+1. Parse resume
+2. Extract skills
+3. Retrieve nearby/filtered jobs from Node
+4. Match and rank jobs
+5. Explain top recommendations
+6. User selects one job
+7. Generate missing-skill roadmap
+8. Generate interview questions
+9. Generate cover letter
+10. Allow Save Job and Track Application
+
+This can be orchestrated through explicit service functions; a heavy agent framework is not required.
+
+Document why this is agentic:
+- multiple tools/services
+- goal-based steps
+- context passed between steps
+- actions based on previous results
+
+Create:
+
+docs/AGENT_WORKFLOW.md
+
+==================================================
+PART 16 — NAVBAR AND USER FLOW
+==================================================
+
+Update Navbar for logged-in users:
+
+- Search Jobs
+- Resume
+- Recommendations
+- Saved Jobs
+- Applications
+- Dashboard
+- user name
+- Logout
+
+Keep mobile responsiveness.
+
+Landing page buttons:
+
+- Search Jobs:
+  - authenticated → /search
+  - unauthenticated → /login with redirect state
+
+- Get Started:
+  - authenticated → /dashboard
+  - unauthenticated → /register
+
+==================================================
+PART 17 — ENVIRONMENT FILES
+==================================================
+
+Update examples only. Never overwrite real secret files.
+
+frontend/.env.example:
+
+VITE_CORE_API_URL=http://localhost:5001/api
+VITE_AI_API_URL=http://localhost:8000/api
+
+python-backend/.env.example:
+
+PORT=8000
+NODE_BACKEND_URL=http://localhost:5001/api
+JWT_SECRET=use_the_same_secret_as_node_backend
+GEMINI_API_KEY=
+GEMINI_MODEL=
+CLIENT_URL=http://localhost:5173
+
+Node .env example should preserve existing variables.
+
+==================================================
+PART 18 — ERROR HANDLING AND SECURITY
+==================================================
+
+Ensure:
+
+- No passwords, JWTs or API keys logged
+- No stack traces sent in production
+- Frontend displays backend messages, not misleading “internet connection” messages
+- PDF validation
+- SQL parameterization
+- JWT validation
+- user ownership checks
+- AI timeout handling
+- Node/Python service-unavailable handling
+- duplicate save/application handling
+- empty results handling
+- location permission denial handling
+
+Do not add Redis yet unless it already exists and works. Local completion is the priority.
+
+==================================================
+PART 19 — TESTING
+==================================================
+
+Test this complete flow:
+
+1. Register user
+2. Logout
+3. Login
+4. Refresh and remain logged in
+5. Search all jobs
+6. Search React jobs
+7. Filter internship
+8. Filter Gurugram
+9. Use GPS with radius
+10. Toggle map
+11. Open job details
+12. Save job
+13. View saved jobs
+14. Record application
+15. Update application to interview
+16. View dashboard counts
+17. Upload valid PDF resume
+18. Reject non-PDF
+19. Reject oversized PDF
+20. Display extracted skills
+21. Generate ranked recommendations
+22. Select job
+23. Display matched and missing skills
+24. Generate agent output when Gemini key exists
+25. Show graceful fallback when Gemini key is absent
+
+Run:
+
+- Node syntax checks on all new/modified JS files
+- frontend npm build
+- Python import/compile checks
+- Node server startup
+- Python server startup
+- existing health endpoints
+- existing auth flow
+- database initialization for new tables
+- API smoke tests where possible
+
+Do not claim a test passed unless actually executed.
+
+==================================================
+PART 20 — DOCUMENTATION
+==================================================
+
+Update README with:
+
+- complete architecture
+- local installation
+- PostgreSQL setup
+- db:init
+- db:seed
+- all three run commands
+- environment variables
+- major API endpoints
+- complete demo flow
+- current limitation that seeded jobs are demonstrational
+- Gemini optional behaviour
+- deployment preparation notes
+
+Create:
+
+docs/LOCAL_DEMO_GUIDE.md
+docs/AGENT_WORKFLOW.md
+docs/API_OVERVIEW.md
+docs/KNOWN_LIMITATIONS.md
+
+==================================================
+FINAL REPORT
+==================================================
+
+At completion report only:
+
+1. Files created
+2. Files modified
+3. Packages installed
+4. Database migrations/schema changes
+5. Commands actually executed
+6. Tests actually passed
+7. Tests not run
+8. Manual environment steps remaining
+9. Exact run commands
+10. Any unresolved issue
+
+Do not give a long explanation before editing.
+Inspect first, implement carefully, run checks, and preserve all existing working code.

@@ -1,0 +1,546 @@
+# PROJECT NAME
+
+NearHire AI
+AI Career Coach + Hyperlocal Job Intelligence Platform
+
+=========================================
+PROJECT GOAL
+=========================================
+
+Transform the existing NearHire project into a production-quality AI Career Coach that helps users throughout their career journey.
+
+The platform must not only search jobs but also act as a personal AI mentor.
+
+The backend should continuously collect real job listings from public company career pages and supported public job sources, normalize them, and store them in PostgreSQL.
+
+The frontend should feel like a premium SaaS platform similar to Linear, Vercel, Notion, Stripe, and Lovable.
+
+Do NOT create a basic CRUD application.
+
+Build a scalable product.
+
+=========================================
+CORE FEATURES
+=========================================
+
+1. AI Career Coach
+
+An intelligent career assistant powered by Gemini.
+
+Capabilities:
+
+• Resume Review
+• Resume ATS Score
+• Skill Gap Analysis
+• Missing Skills Detection
+• Career Roadmap Generator
+• Personalized Learning Plan
+• Cover Letter Generator
+• Resume Improvement Suggestions
+• Interview Question Generator
+• Mock Interview Assistant
+• HR Round Preparation
+• Technical Interview Preparation
+• Salary Negotiation Tips
+• Company Research
+• Job Match Explanation
+• Daily Career Advice
+• Weekly Progress Reports
+
+The AI should remember previous conversations during a session.
+
+=========================================
+2. REAL JOB DISCOVERY
+=========================================
+
+The platform must show REAL jobs.
+
+Backend periodically collects job postings from public sources such as:
+
+• Company career pages
+• Public job portals or APIs that permit access
+• Startup career pages
+• LinkedIn company careers (where permitted)
+• Wellfound public listings
+• Greenhouse-hosted jobs
+• Lever-hosted jobs
+
+Implement a scraping/ingestion service that:
+
+• runs every hour
+• detects duplicates
+• extracts structured information
+• validates fields
+• stores clean data
+
+Collected fields:
+
+Job Title
+
+Company
+
+Location
+
+Latitude
+
+Longitude
+
+Salary
+
+Experience
+
+Employment Type
+
+Remote/Hybrid/Onsite
+
+Description
+
+Required Skills
+
+Preferred Skills
+
+Education
+
+Application URL
+
+Company Logo
+
+Posted Date
+
+Source
+
+Job Category
+
+Industry
+
+=========================================
+3. Hyperlocal Search
+=========================================
+
+User enters:
+
+Current Location
+
+OR
+
+PIN Code
+
+OR
+
+City
+
+Choose radius
+
+5 km
+
+10 km
+
+20 km
+
+50 km
+
+100 km
+
+Show only jobs inside the selected radius.
+
+Use OpenStreetMap + Nominatim + Leaflet.
+
+Calculate distance using Haversine Formula.
+
+=========================================
+4. AI Matching Engine
+=========================================
+
+Every job gets a Match Score.
+
+Example:
+
+92%
+
+Why?
+
+Matched Skills
+
+Missing Skills
+
+Resume Strength
+
+Experience Match
+
+Education Match
+
+Distance Score
+
+Expected Salary Match
+
+The AI should explain WHY the score is high or low.
+
+=========================================
+5. Resume Parsing
+=========================================
+
+Upload PDF
+
+Extract
+
+Skills
+
+Projects
+
+Education
+
+Experience
+
+Certificates
+
+Languages
+
+Achievements
+
+Store extracted data.
+
+=========================================
+6. Personalized Dashboard
+=========================================
+
+Dashboard should contain
+
+Applications
+
+Saved Jobs
+
+Interview Schedule
+
+Career Progress
+
+Skill Progress
+
+AI Recommendations
+
+Resume Score
+
+Upcoming Interviews
+
+Learning Progress
+
+Recent AI Chats
+
+Career Goals
+
+=========================================
+7. AI Learning Center
+=========================================
+
+Generate learning roadmap.
+
+Example
+
+Backend Developer
+
+Week 1
+
+Week 2
+
+Week 3
+
+Week 4
+
+Recommend
+
+YouTube
+
+Documentation
+
+Courses
+
+Practice Problems
+
+Projects
+
+=========================================
+8. AI Interview Coach
+=========================================
+
+Generate
+
+Technical Questions
+
+Behavioral Questions
+
+Coding Questions
+
+System Design
+
+HR Questions
+
+Company Specific Questions
+
+After user answers,
+
+AI should evaluate
+
+Communication
+
+Confidence
+
+Correctness
+
+Knowledge
+
+Grammar
+
+Provide suggestions.
+
+=========================================
+9. Company Intelligence
+=========================================
+
+Every company page should contain
+
+Overview
+
+Tech Stack
+
+Hiring Trends
+
+Employee Count
+
+Company Size
+
+Industry
+
+Glassdoor-style insights (where legally available)
+
+Open Positions
+
+Required Skills
+
+=========================================
+10. Notifications
+=========================================
+
+Notify user when
+
+New nearby job appears
+
+AI roadmap updated
+
+Interview tomorrow
+
+Resume score improved
+
+Weekly career report ready
+
+=========================================
+BACKEND
+=========================================
+
+Node.js
+
+Express
+
+Microservice Architecture
+
+REST API
+
+JWT Authentication
+
+Role Based Access
+
+PostgreSQL
+
+Redis
+
+Drizzle ORM
+
+BullMQ
+
+Cron Jobs
+
+Gemini API
+
+Python FastAPI AI Service
+
+=========================================
+SCRAPING SERVICE
+=========================================
+
+Create a dedicated Job Collector Service.
+
+Responsibilities
+
+Fetch public job listings from supported sources
+
+Normalize data
+
+Remove duplicates
+
+Extract structured fields
+
+Geocode locations
+
+Store into PostgreSQL
+
+Schedule updates every hour
+
+Retry failed jobs
+
+Log scraping history
+
+Use respectful rate limiting, robots.txt awareness where appropriate, and prefer official APIs where available.
+
+=========================================
+DATABASE
+=========================================
+
+Normalize tables
+
+Users
+
+Companies
+
+Jobs
+
+Skills
+
+Applications
+
+Bookmarks
+
+Resume
+
+Notifications
+
+Learning Plans
+
+Interview Sessions
+
+AI Conversations
+
+Scrape Logs
+
+=========================================
+FRONTEND
+=========================================
+
+React
+
+Vite
+
+Tailwind
+
+Shadcn
+
+Framer Motion
+
+React Query
+
+React Hook Form
+
+Leaflet
+
+Lucide
+
+Responsive
+
+Dark Mode
+
+Premium UI
+
+=========================================
+DESIGN
+=========================================
+
+Glassmorphism
+
+Floating cards
+
+Blur effects
+
+Animated gradients
+
+Smooth transitions
+
+Modern typography
+
+Premium shadows
+
+Rounded corners
+
+Large spacing
+
+Professional dashboard
+
+=========================================
+PERFORMANCE
+=========================================
+
+Lazy Loading
+
+Virtualized Job List
+
+Image Optimization
+
+Caching
+
+Pagination
+
+Infinite Scroll
+
+Skeleton Loaders
+
+Optimistic Updates
+
+=========================================
+SECURITY
+=========================================
+
+JWT
+
+Refresh Tokens
+
+Rate Limiting
+
+Helmet
+
+CORS
+
+Input Validation
+
+SQL Injection Protection
+
+XSS Protection
+
+=========================================
+DELIVERABLE
+=========================================
+
+Generate production-ready code.
+
+Follow clean architecture.
+
+Separate
+
+Routes
+
+Controllers
+
+Services
+
+Repositories
+
+Middlewares
+
+Models
+
+Utils
+
+Schedulers
+
+AI Service
+
+Scraper Service
+
+Do not generate placeholder components.
+
+Implement fully working features with proper folder structure, reusable components, responsive design, and clean code.

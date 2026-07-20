@@ -1,0 +1,372 @@
+Work only inside the existing NearHire.AI frontend.
+
+IMPORTANT:
+- Do not rewrite backend code.
+- Do not change API endpoints.
+- Do not break auth, search, resume upload, recommendations, save job, applications, dashboard or routing.
+- Inspect existing components before editing.
+- Preserve all working logic and handlers.
+- Improve UI/UX only, except for small frontend-only display improvements such as showing Job ID, location score, empty states, copy buttons and responsive layout.
+- Use React JavaScript, Tailwind CSS and existing dependencies.
+- Do not introduce TypeScript.
+- Run npm build and fix all frontend errors before reporting.
+
+CURRENT WORKING PAGES:
+- LandingPage
+- LoginPage
+- RegisterPage
+- SearchJobsPage
+- JobDetailsPage
+- ResumePage
+- RecommendationsPage
+- SavedJobsPage
+- ApplicationsPage
+- DashboardPage
+- Navbar
+
+OBJECTIVE:
+Transform NearHire.AI into a premium hackathon-ready SaaS interface with a consistent modern design system.
+
+==================================================
+1. GLOBAL DESIGN SYSTEM
+==================================================
+
+Update frontend/src/index.css.
+
+Create reusable CSS variables and utility classes using Tailwind @layer:
+
+- deep navy background accents
+- indigo and violet brand gradient
+- cyan highlight
+- soft neutral backgrounds
+- premium cards
+- glass effects
+- subtle borders
+- consistent rounded corners
+- shadows
+- focus styles
+- animated gradient text
+- skeleton shimmer
+- custom scrollbar
+- fade-up animation
+- reduced-motion support
+
+Use a premium visual style inspired by modern SaaS products, but do not copy any brand.
+
+Body:
+- clean background
+- antialiased text
+- strong typography hierarchy
+- accessible contrast
+
+Do not overuse animations.
+
+==================================================
+2. NAVBAR
+==================================================
+
+Redesign Navbar while preserving all routes and logout logic.
+
+Requirements:
+- premium sticky translucent navbar with backdrop blur
+- gradient NearHire.AI logo
+- clear active state
+- responsive mobile drawer
+- user avatar with first letter
+- dropdown containing:
+  - Dashboard
+  - Saved Jobs
+  - Applications
+  - Logout
+- desktop nav icons using inline SVG or an already installed icon library
+- no emoji-based navigation labels
+- notification icon placeholder only, no fake notification count
+- mobile menu must close after navigation
+- accessible buttons and aria labels
+
+==================================================
+3. LANDING PAGE
+==================================================
+
+Redesign LandingPage completely while preserving navigation logic.
+
+Sections:
+1. Premium hero
+   - strong headline
+   - highlighted “nearby jobs”
+   - short value proposition
+   - Search Jobs and Get Started CTA
+   - trust note: deterministic AI matching
+   - floating product-preview cards showing:
+     - 94% resume match
+     - 4.8 km distance
+     - missing skills
+2. Product statistics
+   - 35 demo jobs
+   - 12 companies
+   - 25 skills
+   - AI-powered analysis
+3. How it works
+   - Set location
+   - Upload resume
+   - Get ranked jobs
+   - Prepare and apply
+4. Feature grid
+   - Hyperlocal search
+   - Resume intelligence
+   - Matching breakdown
+   - Career assistant
+   - Map discovery
+   - Application tracking
+5. Differentiator section
+   - explain skills + distance + experience + preferences
+6. Final CTA
+
+Must look polished on mobile and desktop.
+
+==================================================
+4. SEARCH PAGE
+==================================================
+
+Preserve all current search behavior and API calls.
+
+Redesign:
+- page header with compact stats
+- desktop two-column layout:
+  - sticky left filter panel
+  - right results area
+- on smaller screens keep filters stacked
+- active-filter chips
+- list/map segmented toggle
+- premium job cards
+- company avatar/logo placeholder
+- save icon placeholder only if save action is not already available here
+- job ID short display like NH-<last 8 chars>
+- verified badge
+- salary, work mode, type, experience and distance icons
+- improved loading skeletons
+- polished zero-results state
+- better pagination
+- location mode banner
+- map view must remain functional
+
+Do not alter working search logic.
+
+==================================================
+5. JOB DETAILS PAGE
+==================================================
+
+Preserve save/apply/analyze logic.
+
+Redesign into:
+- back navigation
+- premium header card
+- two-column desktop layout
+- main content
+- sticky action sidebar
+
+Show:
+- Job ID prominently
+- company name and verified badge
+- source label
+- location
+- distance
+- salary
+- experience
+- work mode
+- job type
+- posted date
+- required skills
+- preferred skills
+- description
+- requirements
+- company website
+
+Sticky sidebar:
+- Save Job
+- Apply on Official Website
+- Analyze Resume
+- copy Job ID button
+- share link button using navigator.share with clipboard fallback
+
+Add “How NearHire helps” section:
+- resume match
+- learning roadmap
+- interview questions
+- cover letter
+
+Do not show fake match score when no analysis exists.
+
+==================================================
+6. RESUME PAGE
+==================================================
+
+Preserve PDF upload and recommendation logic.
+
+Redesign:
+- premium upload zone
+- selected file card
+- optional Job ID section
+- analysis progress
+- summary dashboard after analysis
+- cards for:
+  - skills detected
+  - education hints
+  - projects found
+  - experience hints
+- selected-job score ring
+- matched skills
+- missing required skills
+- clear CTA for recommendations
+- location section:
+  - use browser location
+  - manual coordinates fallback
+  - radius selector
+- pass latitude, longitude and radius to recommendation API if the existing service supports it; otherwise preserve current behavior and display a clear note
+
+No fake ATS score unless backend provides one.
+Label any estimated UI metric clearly as “Resume completeness estimate” if derived client-side.
+
+==================================================
+7. RECOMMENDATIONS PAGE
+==================================================
+
+Preserve current recommendation and AI calls.
+
+Redesign:
+- premium top summary
+- detected skill count
+- recommendation count
+- best match
+- selected location/radius where available
+- ranked cards
+- circular match score
+- score breakdown for:
+  - required skills
+  - preferred skills
+  - location
+  - experience
+  - preferences
+  only when values exist
+- Job ID
+- “Why recommended” section derived from existing match explanation and score data
+- matched and missing skills
+- Save, View Job, Interview Questions, Learning Roadmap and Cover Letter actions
+
+AI output panels:
+- tabs or accordion
+- Interview Questions sections:
+  - Technical
+  - Project-based
+  - Behavioural
+- Learning roadmap displayed as timeline
+- Cover letter displayed in a readable editor card
+- Copy output button
+- graceful Gemini-unavailable state
+
+Do not invent score components that backend did not return.
+
+==================================================
+8. DASHBOARD PAGE
+==================================================
+
+Preserve dashboard API.
+
+Redesign:
+- personalized greeting
+- four premium stats cards
+- application pipeline visual
+- recent applications timeline
+- recently saved jobs
+- quick-action cards
+- profile readiness section based only on available frontend data
+- no fake charts or statistics
+- responsive grid
+- polished loading skeletons
+
+==================================================
+9. SAVED JOBS AND APPLICATIONS
+==================================================
+
+Apply the same design system:
+- modern cards
+- status badges
+- empty states
+- confirmation modal styling
+- consistent action buttons
+- Job ID display
+- mobile responsiveness
+
+Preserve all working logic.
+
+==================================================
+10. LOGIN AND REGISTER
+==================================================
+
+Redesign:
+- split-screen or centered premium auth card
+- NearHire branding
+- benefit bullets
+- accessible form fields
+- strong error messages
+- password hint
+- responsive layout
+- preserve all auth logic
+
+==================================================
+11. COMPONENT EXTRACTION
+==================================================
+
+Extract reusable frontend-only components where useful:
+
+- PageHeader
+- StatCard
+- JobBadge
+- SkillChip
+- MatchScoreRing
+- EmptyState
+- LoadingSkeleton
+- SectionCard
+- JobIdBadge
+- CopyButton
+
+Do not over-engineer.
+
+==================================================
+12. QUALITY RULES
+==================================================
+
+- No emoji-only UI; use inline SVG or installed icons.
+- No fake production data.
+- Keep Demo Dataset labels visible.
+- Keep accessibility labels.
+- Mobile-first responsiveness.
+- No horizontal overflow.
+- No broken maps.
+- No API logic changes unless strictly required for display.
+- Preserve all existing service calls and handlers.
+- Remove unused imports.
+- Keep code readable.
+
+==================================================
+13. VERIFICATION
+==================================================
+
+Run:
+- npm install only if needed
+- npm run build
+- fix all build errors
+- check all routes compile
+- verify no undefined property crashes
+- verify map imports
+- verify auth pages
+- verify recommendations page without state shows empty state
+- verify dashboard loading state
+- verify mobile navbar
+
+FINAL REPORT:
+- files created
+- files modified
+- dependencies added
+- build result
+- unresolved UI issues

@@ -1,0 +1,571 @@
+You are a Senior Full Stack Engineer, DevOps Engineer, and QA Engineer.
+
+Your task is NOT to review the code.
+Your task is to make the ENTIRE NearHire project production-ready.
+
+IMPORTANT:
+Do NOT stop after finding errors.
+Automatically FIX every issue you find.
+Do NOT leave TODOs.
+Do NOT leave placeholders.
+Do NOT leave partially working features.
+
+====================================================
+PROJECT GOAL
+====================================================
+
+NearHire should be a fully functional AI-powered job portal.
+
+The project must run locally without runtime errors.
+
+Frontend, Node backend, Python AI backend, PostgreSQL, and Job Scraper must work together perfectly.
+
+====================================================
+STEP 1 — ANALYZE ENTIRE PROJECT
+====================================================
+
+Scan every file in the project.
+
+Understand:
+
+Frontend
+Backend
+Python backend
+Database
+Authentication
+Job scraper
+Resume parser
+ATS
+AI services
+Notifications
+Recruiter module
+Job seeker module
+API integrations
+Environment variables
+
+Create a dependency map before changing anything.
+
+====================================================
+STEP 2 — FIX ALL ERRORS
+====================================================
+
+Find and automatically fix:
+
+404 errors
+
+500 errors
+
+401 errors
+
+403 errors
+
+CORS issues
+
+Import errors
+
+Syntax errors
+
+Unhandled promise rejections
+
+Unhandled exceptions
+
+Missing environment variables
+
+Broken routes
+
+Broken controllers
+
+Broken services
+
+Broken repositories
+
+Wrong API URLs
+
+Wrong HTTP methods
+
+Broken middleware
+
+Circular dependencies
+
+Database query failures
+
+Null pointer errors
+
+Undefined variables
+
+Type mismatches
+
+Incorrect async/await usage
+
+Broken validation
+
+Broken JWT authentication
+
+Broken password hashing
+
+Broken recruiter flow
+
+Broken job seeker flow
+
+Broken resume flow
+
+Broken ATS flow
+
+Broken AI endpoints
+
+Broken scheduler
+
+Broken scraper integration
+
+Broken geolocation
+
+Broken search
+
+Broken filters
+
+Broken pagination
+
+Broken upload
+
+Broken image handling
+
+Broken email sending
+
+Broken notifications
+
+Everything that prevents the project from working.
+
+====================================================
+STEP 3 — VERIFY EVERY API
+====================================================
+
+Automatically test every backend endpoint.
+
+Examples:
+
+POST /register
+
+POST /login
+
+POST /logout
+
+GET /me
+
+POST /forgot-password
+
+POST /reset-password
+
+GET /jobs
+
+GET /jobs/:id
+
+POST /jobs
+
+PUT /jobs/:id
+
+DELETE /jobs/:id
+
+POST /jobs/:id/apply
+
+GET /applications
+
+GET /saved-jobs
+
+POST /resume/upload
+
+POST /resume/analyze
+
+POST /ats
+
+POST /ai/chat
+
+POST /ai/interview
+
+POST /ai/roadmap
+
+GET /notifications
+
+Recruiter dashboard
+
+Recruiter analytics
+
+Admin endpoints (only if kept)
+
+Health endpoints
+
+Job scraper endpoints
+
+Every endpoint must return correct JSON.
+
+No endpoint should return:
+
+404
+
+500
+
+Unhandled Exception
+
+====================================================
+STEP 4 — VERIFY FRONTEND
+====================================================
+
+Run through the complete frontend.
+
+Verify:
+
+Landing page
+
+Navbar
+
+Authentication
+
+Login
+
+Register
+
+Forgot password
+
+Dashboard
+
+Profile
+
+Resume upload
+
+Resume preview
+
+Resume ATS
+
+Nearby jobs
+
+Search
+
+Filters
+
+Job details
+
+Saved jobs
+
+Apply
+
+Application history
+
+Recruiter dashboard
+
+Recruiter analytics
+
+Post job
+
+Edit job
+
+Delete job
+
+Applicants
+
+Notifications
+
+Settings
+
+Dark mode
+
+Responsive layout
+
+Loading states
+
+Error messages
+
+Empty states
+
+Everything must work.
+
+====================================================
+STEP 5 — FIX AUTHENTICATION
+====================================================
+
+Verify JWT.
+
+Verify cookies.
+
+Verify protected routes.
+
+Verify role middleware.
+
+Only Job Seeker and Recruiter roles should be visible in UI.
+
+If Admin portal is unused:
+
+Remove Admin from frontend.
+
+Keep backend compatible without breaking database.
+
+====================================================
+STEP 6 — DATABASE
+====================================================
+
+Verify PostgreSQL.
+
+Verify migrations.
+
+Verify schema.
+
+Verify foreign keys.
+
+Verify indexes.
+
+Verify constraints.
+
+Fix incorrect queries.
+
+Create missing tables if needed.
+
+Ensure seed data works.
+
+====================================================
+STEP 7 — JOB SCRAPER
+====================================================
+
+Verify Job Scraper connection.
+
+If backend cannot connect:
+
+Automatically fix URLs.
+
+Automatically fix ports.
+
+Automatically fix environment variables.
+
+Verify:
+
+Greenhouse
+
+Lever
+
+RapidAPI
+
+JSearch
+
+RemoteOK
+
+Remotive
+
+Arbeitnow
+
+Geocoding
+
+Deduplication
+
+Scheduler
+
+Store jobs in database.
+
+Replace every dummy job with real jobs.
+
+====================================================
+STEP 8 — ATS
+====================================================
+
+Make ATS score real.
+
+Improve parsing.
+
+Improve keyword matching.
+
+Improve section detection.
+
+Improve scoring.
+
+Never return fake values.
+
+====================================================
+STEP 9 — AI
+====================================================
+
+Verify:
+
+Interview Questions
+
+Career Roadmap
+
+Resume Improvement
+
+Chat Assistant
+
+Job Matching
+
+Skill Gap Analysis
+
+Fallback AI providers if Gemini fails.
+
+====================================================
+STEP 10 — PERFORMANCE
+====================================================
+
+Fix:
+
+Slow queries
+
+Duplicate API calls
+
+Memory leaks
+
+Infinite renders
+
+Infinite loops
+
+Large bundle size
+
+N+1 queries
+
+Unnecessary rerenders
+
+====================================================
+STEP 11 — SECURITY
+====================================================
+
+Fix:
+
+SQL Injection
+
+XSS
+
+JWT security
+
+Password hashing
+
+Input validation
+
+Rate limiting
+
+Helmet
+
+CORS
+
+Environment variable leaks
+
+====================================================
+STEP 12 — FINAL TEST
+====================================================
+
+Do NOT stop until ALL of these work:
+
+✓ User Registration
+
+✓ User Login
+
+✓ Recruiter Login
+
+✓ Forgot Password
+
+✓ Upload Resume
+
+✓ Resume Parsing
+
+✓ ATS Analysis
+
+✓ AI Chat
+
+✓ AI Interview
+
+✓ AI Roadmap
+
+✓ Search Jobs
+
+✓ Nearby Jobs
+
+✓ Apply Job
+
+✓ Save Job
+
+✓ View Applications
+
+✓ Recruiter Dashboard
+
+✓ Recruiter Analytics
+
+✓ Post Job
+
+✓ Edit Job
+
+✓ Delete Job
+
+✓ View Applicants
+
+✓ Notifications
+
+✓ Profile Update
+
+✓ Job Scraper
+
+✓ Scheduler
+
+✓ PostgreSQL
+
+✓ Python Backend
+
+✓ Node Backend
+
+✓ Frontend
+
+====================================================
+FINAL REQUIREMENT
+====================================================
+
+Do NOT only tell me what is wrong.
+
+Automatically FIX everything.
+
+Modify any necessary files.
+
+Run validation after every fix.
+
+Continue until there are:
+
+0 runtime errors
+
+0 build errors
+
+0 console errors
+
+0 broken routes
+
+0 failed API calls
+
+0 dummy data
+
+0 placeholder implementations
+
+Finally generate a report including:
+
+1. Files modified
+
+2. Files added
+
+3. Files removed
+
+4. Database changes
+
+5. API changes
+
+6. Environment variables required
+
+7. Features fixed
+
+8. Remaining issues (must be empty if everything is successful)
+
+The project should be fully runnable by executing:
+
+Frontend:
+npm install
+npm run dev
+
+Backend:
+npm install
+npm run dev
+
+Python Backend:
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+
+Job Scraper:
+uvicorn app.main:app --reload --port 8100
+
+No manual fixes should be required after your changes.

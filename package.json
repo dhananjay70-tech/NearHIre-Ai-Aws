@@ -1,0 +1,15 @@
+{
+  "name": "nearhire-ai",
+  "version": "1.0.0",
+  "description": "AI-powered hyperlocal job discovery platform - monorepo root",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:node": "cd node-backend && npm run dev",
+    "dev:python": "cd python-backend && uvicorn app.main:app --reload --port 8000",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:node\" \"npm run dev:python\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

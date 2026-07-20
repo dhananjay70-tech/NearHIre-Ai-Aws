@@ -1,0 +1,36 @@
+Use the latest GitHub repository as the single source of truth. Ignore any previous assumptions or cached state. Clone the current repository and work only on the latest GitHub code.
+
+Run the complete NearHire project locally, including:
+- React frontend
+- Node.js backend
+- Python FastAPI backend
+- Job Scraper (if required)
+
+Reproduce the "401 Authentication required. Please log in." issue on Resume Analyzer, Career DNA, and all protected AI endpoints.
+
+Trace the complete authentication flow from frontend → Node backend → FastAPI backend. Find the root cause instead of bypassing authentication. Do NOT remove or disable authentication middleware.
+
+Fix the authentication flow so the frontend correctly sends the JWT/cookie and the FastAPI backend validates it properly.
+
+After fixing:
+- Test login
+- Test Resume Analyzer
+- Test Career DNA
+- Test Interview Questions
+- Test all protected AI endpoints
+- Verify recruiter and job seeker features still work
+- Ensure frontend builds successfully
+- Ensure Node backend starts without errors
+- Ensure FastAPI starts without errors
+- Ensure there are no console or network errors
+
+Do not change UI unless necessary.
+Do not modify environment variables unless required.
+Do not commit or push automatically.
+
+Provide:
+1. Root cause of the issue
+2. Files modified
+3. Exact changes made
+4. Commands used for testing
+5. Confirmation that the project works locally before any push.

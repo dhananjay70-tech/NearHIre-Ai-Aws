@@ -1,0 +1,109 @@
+Create a production-style monorepo project named "nearhire-ai" for an AI-powered hyperlocal job discovery platform.
+
+Use this structure:
+
+nearhire-ai/
+  frontend/
+  node-backend/
+  python-backend/
+  database/
+  docs/
+  package.json
+  .gitignore
+  README.md
+
+Requirements:
+
+1. Frontend
+- React.js with Vite
+- JavaScript only, no TypeScript
+- React Router
+- Axios
+- Tailwind CSS
+- Basic placeholder pages:
+  - LandingPage
+  - LoginPage
+  - RegisterPage
+  - SearchJobsPage
+  - JobDetailsPage
+  - ResumePage
+  - RecommendationsPage
+  - SavedJobsPage
+  - ApplicationsPage
+  - DashboardPage
+- Add a simple Navbar
+- Configure routes for all pages
+- Create src/services/coreApi.js for Node backend
+- Create src/services/aiApi.js for Python backend
+- Use these base URLs through environment variables:
+  VITE_CORE_API_URL=http://localhost:5001/api
+  VITE_AI_API_URL=http://localhost:8000/api
+
+2. Node backend
+- Node.js + Express
+- JavaScript only
+- Port 5001
+- Use dotenv, cors, helmet, express-rate-limit, cookie-parser
+- Create folders:
+  src/config
+  src/controllers
+  src/routes
+  src/middleware
+  src/services
+  src/repositories
+  src/utils
+- Add:
+  GET /health
+  GET /api/health
+- Add centralized error middleware
+- Add 404 handler
+- Add PostgreSQL connection setup using pg
+- Read DATABASE_URL from .env
+- Create .env.example
+- Do not implement auth yet
+- Add nodemon dev script
+
+3. Python backend
+- FastAPI
+- Port 8000
+- Create folders:
+  app/api
+  app/services
+  app/models
+  app/utils
+- Add:
+  GET /health
+  GET /api/health
+- Enable CORS for http://localhost:5173
+- Add config using python-dotenv
+- Add requirements.txt with:
+  fastapi
+  uvicorn
+  python-dotenv
+  python-multipart
+  pydantic
+  httpx
+  pymupdf
+- Do not implement AI yet
+
+4. Root setup
+- Add a root package.json using concurrently
+- Scripts:
+  npm run dev:frontend
+  npm run dev:node
+  npm run dev:python
+  npm run dev
+- The root "npm run dev" should start frontend, Node backend, and Python backend together
+- Add a proper .gitignore for Node, React, Python, .env, uploads, __pycache__, venv, and build files
+- Add README with exact local setup commands
+
+5. Important
+- Do not add fake business logic
+- Do not skip any requested folder
+- Keep code clean and beginner-readable
+- At the end, print:
+  - final folder structure
+  - installation commands
+  - run commands
+  - expected URLs
+  - any manual steps required

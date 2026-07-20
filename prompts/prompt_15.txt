@@ -1,0 +1,1 @@
+"Replace the existing AWS SES email implementation with Brevo API, configure it using BREVO_API_KEY, BREVO_SENDER_EMAIL, and BREVO_SENDER_NAME environment variables, and migrate all signup OTP, login OTP, forgot password OTP, welcome email, and job alert email functionality while preserving the existing authentication flow and API endpoints."

@@ -1,0 +1,402 @@
+Enhance my NearHire AI project by implementing a complete Role-Based Authentication and Authorization system.
+
+Current Stack:
+- Frontend: React + Vite + Tailwind CSS
+- Backend: Node.js + Express
+- AI Service: FastAPI
+- Database: PostgreSQL
+- JWT Authentication
+
+==========================================
+USER ROLES
+==========================================
+
+There will be only three roles.
+
+1. Job Seeker
+2. Recruiter
+3. Admin
+
+Every user must belong to exactly one role.
+
+==========================================
+DATABASE
+==========================================
+
+Update the users table.
+
+Add a new column
+
+role
+
+Allowed values:
+
+- seeker
+- recruiter
+- admin
+
+Default role:
+
+seeker
+
+==========================================
+BACKEND
+==========================================
+
+Update authentication APIs.
+
+Registration:
+
+POST /auth/register
+
+Accept
+
+name
+email
+password
+role
+
+Only allow
+
+seeker
+recruiter
+
+Admin accounts must never be created from public registration.
+
+Admin accounts should only be inserted manually or created through an admin-only endpoint.
+
+------------------------------------------
+
+Login
+
+POST /auth/login
+
+Return
+
+{
+    token,
+    refreshToken,
+    user:{
+        id,
+        name,
+        email,
+        role,
+        profileImage
+    }
+}
+
+JWT must include
+
+id
+email
+role
+
+==========================================
+AUTHORIZATION
+==========================================
+
+Create middleware.
+
+authenticateJWT
+
+verifyRecruiter
+
+verifyAdmin
+
+verifySeeker
+
+Example
+
+Only recruiters can access
+
+/recruiter/*
+
+Only admins can access
+
+/admin/*
+
+Only seekers can access
+
+/dashboard
+/applications
+/saved
+/resume
+
+Return HTTP 403 for unauthorized access.
+
+==========================================
+FRONTEND
+==========================================
+
+Remove
+
+Recruiter Portal
+
+Admin Panel
+
+from the AI Tools dropdown.
+
+AI Tools should only contain AI features.
+
+- ATS Score
+- Resume Rewriter
+- Skill Gap Analysis
+- Learning Roadmap
+- Interview Preparation
+- Job Match AI
+
+==========================================
+LOGIN SCREEN
+==========================================
+
+Redesign login.
+
+Before email/password display
+
+Choose your account type
+
+○ Job Seeker
+
+○ Recruiter
+
+○ Admin
+
+OR
+
+Three cards
+
+Job Seeker
+
+Recruiter
+
+Admin
+
+Store selected role.
+
+==========================================
+AFTER LOGIN
+==========================================
+
+If role == seeker
+
+redirect
+
+/dashboard
+
+If role == recruiter
+
+redirect
+
+/recruiter/dashboard
+
+If role == admin
+
+redirect
+
+/admin/dashboard
+
+==========================================
+NAVBAR
+==========================================
+
+Job Seeker Navbar
+
+Logo
+Jobs
+Resume
+Dashboard
+Applications
+Saved
+AI Tools
+Notifications
+Profile
+
+Recruiter Navbar
+
+Logo
+Dashboard
+Post Job
+Manage Jobs
+Applicants
+Company
+Analytics
+Profile
+
+Admin Navbar
+
+Logo
+Dashboard
+Users
+Recruiters
+Jobs
+Reports
+Settings
+Profile
+
+Navbar should automatically change according to logged-in role.
+
+==========================================
+ROUTES
+==========================================
+
+Protected Routes
+
+/dashboard
+
+Only seeker
+
+/recruiter/dashboard
+
+Only recruiter
+
+/recruiter/jobs
+
+Only recruiter
+
+/recruiter/post-job
+
+Only recruiter
+
+/recruiter/applicants
+
+Only recruiter
+
+/admin/dashboard
+
+Only admin
+
+/admin/users
+
+Only admin
+
+/admin/jobs
+
+Only admin
+
+/admin/reports
+
+Only admin
+
+Unauthorized users should be redirected to
+
+/unauthorized
+
+==========================================
+RECRUITER FEATURES
+==========================================
+
+Recruiter dashboard should include
+
+Statistics
+
+Total Jobs
+
+Active Jobs
+
+Applicants
+
+Shortlisted
+
+Recent Applications
+
+Quick Actions
+
+Post Job
+
+Manage Jobs
+
+Company Profile
+
+Analytics
+
+==========================================
+ADMIN FEATURES
+==========================================
+
+Admin Dashboard
+
+Users
+
+Recruiters
+
+Companies
+
+Jobs
+
+Applications
+
+Reports
+
+Site Analytics
+
+Platform Statistics
+
+System Settings
+
+==========================================
+SEEKER FEATURES
+==========================================
+
+Dashboard
+
+Nearby Jobs
+
+Recommended Jobs
+
+Resume
+
+Applications
+
+Saved Jobs
+
+AI Resume
+
+ATS Score
+
+Skill Gap
+
+Learning Roadmap
+
+Interview Practice
+
+==========================================
+UI
+==========================================
+
+Maintain existing NearHire premium dark theme.
+
+Do not change branding.
+
+Use Tailwind CSS.
+
+Responsive.
+
+Modern cards.
+
+Framer Motion animations.
+
+Shadcn UI components.
+
+==========================================
+SECURITY
+==========================================
+
+Protect every API.
+
+Validate JWT.
+
+Never trust frontend role.
+
+Always verify role on backend.
+
+==========================================
+OUTPUT
+==========================================
+
+Provide complete production-ready code.
+
+Do not remove existing features.
+
+Refactor existing code instead of rewriting the project.
+
+Keep backward compatibility where possible.

@@ -1,0 +1,110 @@
+You are a Senior Full-Stack Engineer.
+
+Analyze my ENTIRE project before making any changes.
+
+Goal:
+Make the backend 100% functional and ensure every frontend API call works correctly.
+
+Requirements:
+
+1. Scan the entire backend for all routes, controllers, services, middleware, models, database configuration, and environment variables.
+
+2. Compare every frontend API call with backend routes.
+   - Find every endpoint returning 404, 500, 401, or other errors.
+   - If the frontend uses an incorrect endpoint, update it.
+   - If the backend route is missing but required by the frontend, implement it.
+
+3. Verify and fix all recruiter APIs, including:
+   - POST /api/recruiter/jobs
+   - GET /api/recruiter/jobs
+   - GET /api/recruiter/dashboard
+   - GET /api/recruiter/applicants
+   - PUT /api/recruiter/jobs/:id
+   - DELETE /api/recruiter/jobs/:id
+
+4. Verify and fix authentication:
+   - Register
+   - Login
+   - Logout
+   - JWT generation
+   - JWT verification
+   - Role-based authorization
+   - Password hashing
+   - Current user endpoint
+
+5. Verify database integration.
+   - Check PostgreSQL connection.
+   - Ensure all required tables exist.
+   - Fix queries that fail.
+   - Apply migrations if required.
+   - Seed minimal test data if needed.
+
+6. Remove every backend runtime error.
+   - No 404 routes.
+   - No 500 Internal Server Errors.
+   - No unhandled promise rejections.
+   - No undefined variables.
+   - No missing imports.
+   - No incorrect middleware order.
+
+7. Improve error handling.
+   Every API must return JSON like:
+
+{
+  "success": false,
+  "message": "Readable error message"
+}
+
+Never return stack traces to the frontend.
+
+8. Verify all environment variables.
+   Report any missing values and use environment variables instead of hardcoded values.
+
+9. Test every API endpoint locally.
+   Ensure all return the expected status codes:
+   - 200
+   - 201
+   - 400
+   - 401
+   - 403
+   - 404
+   - 500 (only for unexpected failures)
+
+10. Ensure these workflows work end-to-end:
+    - User registration
+    - User login
+    - Recruiter login
+    - Publish job
+    - Update job
+    - Delete job
+    - View recruiter dashboard
+    - View applicants
+    - Search jobs
+    - Nearby jobs
+    - Apply for a job
+    - Save jobs
+    - ATS analysis
+    - Resume upload
+    - AI recommendations
+
+11. Verify backend startup.
+    - Fix any import errors.
+    - Fix circular dependencies.
+    - Ensure all routes are registered.
+    - Ensure middleware loads correctly.
+    - Ensure CORS is configured.
+
+12. Do not remove existing features unless they are broken.
+    Preserve the project architecture.
+
+13. After fixing everything, generate a report including:
+    - Files modified
+    - Routes added
+    - Routes fixed
+    - Database changes
+    - Environment variables required
+    - Bugs fixed
+    - Remaining issues (if any)
+
+Do not stop until the backend runs successfully and every frontend API call completes without 404 or 500 errors.
+```

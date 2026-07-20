@@ -1,0 +1,417 @@
+You are a Senior Full Stack Engineer.
+
+IMPORTANT RULES
+
+1. DO NOT modify the Job Seeker frontend.
+2. DO NOT modify the Job Seeker backend.
+3. DO NOT change Job Seeker APIs.
+4. DO NOT change Job Seeker database logic.
+5. Work ONLY on the Recruiter Portal and its backend.
+6. Preserve the existing project architecture.
+
+====================================================
+OBJECTIVE
+====================================================
+
+Make the Recruiter Portal 100% functional.
+
+Every recruiter feature must work from UI → API → Database → Response.
+
+Do not stop after finding issues.
+
+Automatically fix every issue.
+
+====================================================
+FIX ONLY RECRUITER MODULE
+====================================================
+
+Frontend
+
+Fix:
+
+Recruiter Login
+
+Recruiter Dashboard
+
+Post Job
+
+Manage Jobs
+
+Applicants
+
+Company
+
+Analytics
+
+Notifications
+
+Recruiter Profile
+
+Settings
+
+Edit Profile
+
+Job Statistics
+
+Job Search inside recruiter portal
+
+Loading states
+
+Error messages
+
+Empty states
+
+Navigation
+
+Responsive UI
+
+Broken React components
+
+Broken routing
+
+Blank pages
+
+Infinite loading
+
+Infinite rendering
+
+====================================================
+POST JOB
+====================================================
+
+Fix the complete Post Job flow.
+
+Current error:
+
+invalid input value for enum job_type: "PART TIME"
+
+Find why frontend sends:
+
+PART TIME
+
+while PostgreSQL enum expects another value.
+
+Fix the mapping.
+
+Frontend dropdown values must exactly match backend/database enum.
+
+Examples:
+
+FULL_TIME
+
+PART_TIME
+
+CONTRACT
+
+INTERNSHIP
+
+REMOTE
+
+HYBRID
+
+ONSITE
+
+or whatever the backend enum actually uses.
+
+Do NOT hardcode values.
+
+Read them from backend constants if available.
+
+====================================================
+COMPANY PAGE
+====================================================
+
+The Company page is currently blank.
+
+Find the reason.
+
+Fix:
+
+missing API
+
+wrong API URL
+
+React rendering issue
+
+state management issue
+
+null data
+
+routing issue
+
+backend response
+
+missing database records
+
+The page must display company information correctly.
+
+====================================================
+MANAGE JOBS
+====================================================
+
+Verify:
+
+list jobs
+
+pagination
+
+filters
+
+search
+
+edit
+
+delete
+
+status
+
+publish
+
+draft
+
+close
+
+archive
+
+Everything must work.
+
+====================================================
+APPLICANTS
+====================================================
+
+Verify:
+
+list applicants
+
+application status
+
+resume download
+
+ATS score
+
+sorting
+
+filtering
+
+pagination
+
+status update
+
+====================================================
+ANALYTICS
+====================================================
+
+Fix analytics.
+
+Verify:
+
+jobs posted
+
+active jobs
+
+applications
+
+views
+
+clicks
+
+recent activity
+
+If some analytics are not implemented:
+
+implement them properly.
+
+Do not return fake numbers.
+
+====================================================
+BACKEND
+====================================================
+
+Work ONLY inside recruiter backend.
+
+Verify:
+
+controllers
+
+routes
+
+services
+
+repositories
+
+middleware
+
+validation
+
+database queries
+
+DTOs
+
+error handling
+
+JWT authorization
+
+role middleware
+
+====================================================
+DATABASE
+====================================================
+
+Verify recruiter tables.
+
+Verify foreign keys.
+
+Verify recruiter-company relationship.
+
+Verify recruiter-job relationship.
+
+Verify recruiter-applicant relationship.
+
+Fix all broken queries.
+
+====================================================
+API TESTING
+====================================================
+
+Test every recruiter endpoint.
+
+POST /api/recruiter/jobs
+
+GET /api/recruiter/jobs
+
+GET /api/recruiter/jobs/:id
+
+PUT /api/recruiter/jobs/:id
+
+DELETE /api/recruiter/jobs/:id
+
+GET /api/recruiter/dashboard
+
+GET /api/recruiter/company
+
+PUT /api/recruiter/company
+
+GET /api/recruiter/applicants
+
+GET /api/recruiter/analytics
+
+Every endpoint must return correct JSON.
+
+No endpoint should return:
+
+404
+
+500
+
+Unhandled Exception
+
+====================================================
+VALIDATION
+====================================================
+
+Validate every recruiter form.
+
+Return user-friendly errors.
+
+Never crash.
+
+Never return raw database errors.
+
+====================================================
+PERFORMANCE
+====================================================
+
+Remove duplicate API calls.
+
+Fix unnecessary re-renders.
+
+Fix memory leaks.
+
+Fix slow queries.
+
+====================================================
+SECURITY
+====================================================
+
+Verify recruiter authorization.
+
+A recruiter must only access their own:
+
+Jobs
+
+Applicants
+
+Company
+
+Analytics
+
+====================================================
+FINAL TEST
+====================================================
+
+Do NOT stop until these all work:
+
+✓ Recruiter Login
+
+✓ Dashboard
+
+✓ Post Job
+
+✓ Edit Job
+
+✓ Delete Job
+
+✓ Manage Jobs
+
+✓ Company Page
+
+✓ Applicants
+
+✓ Analytics
+
+✓ Notifications
+
+✓ Profile
+
+✓ Search
+
+✓ Pagination
+
+✓ Filters
+
+✓ PostgreSQL
+
+✓ JWT
+
+✓ API
+
+✓ React UI
+
+====================================================
+IMPORTANT
+====================================================
+
+Do NOT modify:
+
+Job Seeker frontend
+
+Job Seeker backend
+
+Job Seeker APIs
+
+Job Seeker pages
+
+Job Seeker database logic
+
+Only fix the Recruiter Portal.
+
+Finally generate a report including:
+
+- Files modified
+- Backend files modified
+- Frontend files modified
+- Database changes
+- APIs fixed
+- Bugs fixed
+- Test results
+- Remaining issues (should be empty if successful)

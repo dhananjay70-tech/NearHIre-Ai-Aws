@@ -1,0 +1,562 @@
+You are a Senior Software Architect and Full Stack AI Engineer.
+
+Analyze my complete project first. Do NOT break existing functionality.
+
+## Goal
+
+Replace all dummy jobs with REAL jobs collected from multiple sources.
+
+Create a completely separate microservice/folder dedicated only to Job Scraping and Job Aggregation.
+
+The architecture should become:
+
+Frontend (React)
+        │
+        ▼
+Node Backend (MS1)
+        │
+        ├──────────────► PostgreSQL
+        │
+        ├──────────────► Python AI Backend (MS2)
+        │
+        └──────────────► Job Scraper Service (NEW)
+                              │
+                              ├── LinkedIn Jobs
+                              ├── Indeed
+                              ├── Internshala
+                              ├── Wellfound
+                              ├── Naukri
+                              ├── RemoteOK
+                              ├── Adzuna API
+                              ├── JSearch API
+                              ├── RapidAPI Job APIs
+                              ├── Arbeitnow API
+                              ├── Jooble API
+                              ├── USAJobs API
+                              ├── Reed API
+                              ├── Greenhouse Job Boards
+                              ├── Lever Job Boards
+                              ├── Company Career Pages
+                              └── Other free job APIs
+
+---------------------------------------------------
+
+## Step 1
+
+Create a new folder
+
+/job-service
+
+Inside create
+
+job-service/
+    src/
+        scrapers/
+            linkedin.py
+            internshala.py
+            wellfound.py
+            naukri.py
+            indeed.py
+            greenhouse.py
+            lever.py
+
+        apis/
+            jsearch.py
+            adzuna.py
+            jooble.py
+            rapidapi.py
+
+        scheduler/
+            cron.py
+
+        database/
+            postgres.py
+
+        models/
+
+        services/
+
+        routes/
+
+        utils/
+
+        config.py
+
+        app.py
+
+requirements.txt
+
+Dockerfile
+
+README.md
+
+---------------------------------------------------
+
+## Step 2
+
+Every scraper should
+
+Fetch Jobs
+
+Normalize Data
+
+Remove Duplicate Jobs
+
+Validate Data
+
+Save Into Database
+
+Return JSON
+
+---------------------------------------------------
+
+## Step 3
+
+Job Schema
+
+title
+
+company
+
+location
+
+latitude
+
+longitude
+
+salary
+
+experience
+
+skills
+
+description
+
+employmentType
+
+remote
+
+hybrid
+
+onsite
+
+industry
+
+companyLogo
+
+companyWebsite
+
+applyLink
+
+source
+
+postedDate
+
+jobType
+
+category
+
+education
+
+city
+
+state
+
+country
+
+pincode
+
+ATS keywords
+
+---------------------------------------------------
+
+## Step 4
+
+If an official Job API exists
+
+USE API.
+
+Examples
+
+JSearch API
+
+Adzuna API
+
+Jooble API
+
+Greenhouse API
+
+Lever API
+
+RapidAPI Jobs
+
+USAJobs API
+
+RemoteOK API
+
+Arbeitnow API
+
+DO NOT SCRAPE when official APIs are available.
+
+Only scrape when there is no public API.
+
+---------------------------------------------------
+
+## Step 5
+
+Implement
+
+Scheduler
+
+Cron Jobs
+
+Every 30 minutes
+
+Fetch latest jobs.
+
+Store only new jobs.
+
+Update expired jobs.
+
+---------------------------------------------------
+
+## Step 6
+
+Database
+
+Create Jobs Table.
+
+Index
+
+Location
+
+Skills
+
+Company
+
+Title
+
+CreatedAt
+
+Radius Search
+
+Full Text Search
+
+---------------------------------------------------
+
+## Step 7
+
+Node Backend Integration
+
+Create service
+
+/services/jobService.js
+
+MS1 should fetch jobs from Job Service
+
+NOT dummy JSON.
+
+Replace every dummy data source.
+
+All existing APIs should continue working.
+
+---------------------------------------------------
+
+## Step 8
+
+Python Backend Integration
+
+MS2 currently calculates
+
+Resume Match
+
+ATS Score
+
+Skill Gap
+
+Recommendations
+
+Interview Questions
+
+Roadmap
+
+Instead of dummy jobs
+
+Fetch REAL jobs from Job Service.
+
+Update every AI workflow.
+
+---------------------------------------------------
+
+## Step 9
+
+Frontend
+
+Replace every hardcoded job.
+
+Job Card
+
+Company Logo
+
+Salary
+
+Experience
+
+Skills
+
+Apply Button
+
+Distance
+
+Remote Badge
+
+Company Website
+
+Posted Time
+
+Source
+
+---------------------------------------------------
+
+## Step 10
+
+Implement Radius Search
+
+User Location
+
+Latitude
+
+Longitude
+
+Radius
+
+5 KM
+
+10 KM
+
+20 KM
+
+50 KM
+
+100 KM
+
+Use PostGIS or Haversine Formula.
+
+---------------------------------------------------
+
+## Step 11
+
+Filtering
+
+Remote
+
+Hybrid
+
+Onsite
+
+Salary
+
+Experience
+
+Skills
+
+Company
+
+Category
+
+Freshers
+
+Internship
+
+Full Time
+
+Part Time
+
+Contract
+
+Location
+
+Posted Today
+
+Last 3 Days
+
+Last Week
+
+---------------------------------------------------
+
+## Step 12
+
+Search
+
+Semantic Search
+
+Keyword Search
+
+Autocomplete
+
+AI Search
+
+Example
+
+"Python Developer near Gurgaon"
+
+"Remote React Internship"
+
+"AI Engineer Bangalore"
+
+---------------------------------------------------
+
+## Step 13
+
+Caching
+
+Redis
+
+Cache Job API
+
+Expire after 30 minutes
+
+---------------------------------------------------
+
+## Step 14
+
+Duplicate Detection
+
+Same Company
+
+Same Title
+
+Same Apply URL
+
+Same Description
+
+Remove duplicates.
+
+---------------------------------------------------
+
+## Step 15
+
+Security
+
+Rate Limiting
+
+Retry Logic
+
+Proxy Support
+
+User Agent Rotation
+
+Captcha Detection
+
+Error Logging
+
+---------------------------------------------------
+
+## Step 16
+
+Logging
+
+Store
+
+Scraping Status
+
+API Status
+
+Success Count
+
+Failure Count
+
+Duplicate Count
+
+Last Run
+
+---------------------------------------------------
+
+## Step 17
+
+Dashboard
+
+Admin Dashboard
+
+Total Jobs
+
+Jobs Today
+
+Active Jobs
+
+Expired Jobs
+
+Sources
+
+Scheduler Status
+
+API Status
+
+---------------------------------------------------
+
+## Step 18
+
+Update Existing APIs
+
+GET /jobs
+
+GET /jobs/search
+
+GET /jobs/:id
+
+GET /jobs/nearby
+
+GET /jobs/company/:id
+
+GET /jobs/recommendation
+
+GET /jobs/similar
+
+GET /jobs/latest
+
+These APIs should now use REAL jobs.
+
+---------------------------------------------------
+
+## Step 19
+
+Documentation
+
+Explain
+
+Folder Structure
+
+Architecture
+
+Data Flow
+
+Scheduler Flow
+
+Scraper Flow
+
+API Flow
+
+MS1 Flow
+
+MS2 Flow
+
+Frontend Flow
+
+---------------------------------------------------
+
+## Step 20
+
+Important Rules
+
+✔ Do NOT break existing backend.
+✔ Keep MS1 and MS2 independent.
+✔ Create Job Service as a third microservice.
+✔ Replace every dummy job with real jobs.
+✔ Use APIs wherever available.
+✔ Scrape only when APIs are unavailable.
+✔ Write clean, production-ready code.
+✔ Use environment variables for API keys.
+✔ Dockerize the service.
+✔ Make it scalable for millions of jobs.
+✔ Add proper error handling, retries, logging, and tests.
+✔ Ensure existing AI features (ATS score, resume matching, recommendations, interview questions) work with real job data.

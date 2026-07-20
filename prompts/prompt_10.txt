@@ -1,0 +1,19 @@
+Redesign the dark theme to create strong visual hierarchy and depth.
+
+Requirements:
+- Page background: #09090B with a subtle radial gradient from the top.
+- Cards should NOT use the same color as the page.
+- Card background: rgba(20,20,24,0.92) with backdrop-filter: blur(18px).
+- Add a 1px border using rgba(255,255,255,0.08).
+- Add a soft shadow: 0 12px 40px rgba(0,0,0,0.45).
+- Border radius: 24px.
+- Add hover animation:
+  - translateY(-6px)
+  - slightly stronger shadow
+  - 250–300ms ease transition.
+- Increase internal padding to 28–32px.
+- Keep text pure white for headings and muted gray for descriptions.
+- Use colored icon backgrounds (violet, blue, orange, green) with 20% opacity instead of plain white.
+- Improve spacing between sections and cards.
+- Preserve all functionality and responsiveness; only enhance the visual design.
+- The final result should resemble a premium SaaS dashboard with depth, floating surfaces, and polished dark-mode aesthetics similar to Linear, Vercel, and Stripe.

@@ -1,0 +1,47 @@
+Implement real job view tracking across the entire NearHire project.
+
+Current issue:
+`totalViews` returns `null` because per-job view tracking has not been implemented. Do not use fake or hardcoded numbers.
+
+Requirements:
+
+1. Database
+- Add a `total_views` column to the jobs table (default 0).
+- If a separate analytics table exists, use it instead of creating duplicate data.
+
+2. Backend
+- Every time a user opens a job details page, increment the job's view count.
+- Count one view per user (or per IP for anonymous users) within a configurable time window (e.g. 24 hours) to prevent duplicate refreshes from inflating counts.
+- Expose `totalViews` in all job APIs.
+
+3. Frontend
+- Display the real view count on:
+  - Job cards
+  - Job details page
+  - Recruiter dashboard
+  - Admin dashboard (if applicable)
+
+4. Analytics
+- Track:
+  - Total views
+  - Unique views
+  - Last viewed timestamp
+
+5. Performance
+- Use an atomic database increment.
+- Avoid race conditions.
+- Do not increment multiple times for page refreshes within the cooldown period.
+
+6. API
+- Add an endpoint if needed:
+  POST /api/jobs/:id/view
+or automatically increment when GET /api/jobs/:id is called.
+
+7. Testing
+- Verify that:
+  - Opening a job increases its view count.
+  - Refreshing repeatedly does not continuously increase the count.
+  - `totalViews` is never null.
+  - Existing functionality remains unchanged.
+
+Generate a summary of all files modified, database changes, API changes, and testing performed.

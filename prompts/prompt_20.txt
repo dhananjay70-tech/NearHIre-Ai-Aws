@@ -1,0 +1,823 @@
+You are a Senior Full Stack Software Engineer and AI Architect.
+
+I already have an existing project named NearHire AI.
+
+IMPORTANT:
+This is NOT a new project.
+Do NOT recreate the project.
+Do NOT change my existing architecture.
+Modify the existing codebase only.
+
+==================================================
+CURRENT TECH STACK
+==================================================
+
+Frontend
+- React.js
+- Vite
+- Tailwind CSS
+- React Router
+- Axios
+- Framer Motion
+
+Backend
+- Node.js
+- Express.js
+
+Database
+- PostgreSQL
+
+Authentication
+- JWT
+
+Maps
+- OpenStreetMap
+- Leaflet.js
+- Nominatim API
+
+AI
+- OpenAI / Grok API (replace Gemini where necessary)
+
+Deployment
+- Without Docker
+- Standard Node.js deployment
+- PostgreSQL database
+- Environment variables
+
+==================================================
+IMPORTANT RULES
+==================================================
+
+• DO NOT USE DOCKER.
+
+• Keep the existing folder structure.
+
+• Reuse existing APIs wherever possible.
+
+• Do not break existing functionality.
+
+• Keep UI premium and responsive.
+
+• Use reusable components.
+
+• Keep code modular.
+
+• Use loading states.
+
+• Use error handling.
+
+• Use optimistic UI updates where possible.
+
+• Add comments only where necessary.
+
+==================================================
+FEATURE 1
+GLOBAL LOCATION BASED JOB SEARCH
+==================================================
+
+Currently users can only search nearby jobs.
+
+I want users to search jobs from ANY CITY.
+
+Examples
+
+Mumbai
+Delhi
+Kolkata
+Pune
+Hyderabad
+Bangalore
+Chennai
+Jaipur
+Lucknow
+Ahmedabad
+
+Flow
+
+User enters city
+
+↓
+
+System converts city into latitude & longitude using Nominatim API
+
+↓
+
+User selects radius
+
+5 km
+10 km
+20 km
+50 km
+100 km
+200 km
+
+↓
+
+Backend fetches jobs inside radius
+
+↓
+
+Display jobs sorted by nearest distance.
+
+Every job card should display
+
+Company
+
+Job title
+
+Distance
+
+Salary
+
+Location
+
+Posted time
+
+Experience
+
+Skills
+
+Apply Button
+
+Use Haversine Formula to calculate distances.
+
+Support searching any location in India.
+
+==================================================
+FEATURE 2
+RECRUITER PORTAL
+==================================================
+
+Create complete recruiter functionality.
+
+Roles
+
+Candidate
+
+Recruiter
+
+Admin
+
+Recruiter Registration
+
+Company Name
+
+Company Email
+
+Password
+
+Phone
+
+Website
+
+Company Description
+
+Industry
+
+Logo
+
+Location
+
+Recruiter Login
+
+JWT authentication
+
+Recruiter Dashboard
+
+Dashboard includes
+
+Total Jobs
+
+Applications
+
+Active Jobs
+
+Expired Jobs
+
+Views
+
+Buttons
+
+Post Job
+
+Manage Jobs
+
+Applicants
+
+Analytics
+
+Company Profile
+
+Job Posting Form
+
+Job Title
+
+Company
+
+Description
+
+Required Skills
+
+Experience
+
+Salary
+
+Employment Type
+
+Remote
+
+Hybrid
+
+Onsite
+
+Latitude
+
+Longitude
+
+City
+
+State
+
+Country
+
+Radius
+
+Deadline
+
+Benefits
+
+Job Type
+
+Internship
+
+Full Time
+
+Part Time
+
+Contract
+
+Applicants Page
+
+View all applicants
+
+Resume
+
+ATS Score
+
+Match Score
+
+Status
+
+Accept
+
+Reject
+
+Interview
+
+Analytics
+
+Applications
+
+Views
+
+Conversion
+
+Top Skills
+
+Most Viewed Jobs
+
+==================================================
+FEATURE 3
+REAL ATS RESUME ANALYZER
+==================================================
+
+Current ATS score is basic.
+
+Replace it with professional ATS analysis.
+
+Flow
+
+Upload Resume
+
++
+
+(Optional)
+
+Upload Job Description
+
+↓
+
+Extract Resume Text
+
+↓
+
+Parse Sections
+
+↓
+
+Identify
+
+Summary
+
+Skills
+
+Experience
+
+Projects
+
+Education
+
+Certifications
+
+Achievements
+
+↓
+
+Calculate ATS Score
+
+Provide
+
+Overall ATS Score
+
+Formatting Score
+
+Keyword Score
+
+Skills Score
+
+Experience Score
+
+Education Score
+
+Readability Score
+
+Grammar Score
+
+Every score should include explanation.
+
+Suggestions
+
+Missing Keywords
+
+Weak Bullet Points
+
+Formatting Issues
+
+Missing Skills
+
+Weak Summary
+
+Missing Action Verbs
+
+Duplicate Content
+
+Too Long
+
+Too Short
+
+If Job Description is uploaded
+
+Compare Resume
+
+↓
+
+Keyword Matching
+
+↓
+
+Skill Matching
+
+↓
+
+Experience Matching
+
+↓
+
+Final Match Score
+
+Highlight
+
+Matched Keywords
+
+Missing Keywords
+
+Recommended Skills
+
+Missing Technologies
+
+Provide ATS Gauge UI
+
+Animated progress bars
+
+Download PDF Report
+
+==================================================
+FEATURE 4
+AI RESUME REWRITER
+==================================================
+
+Add AI Resume Optimizer.
+
+Flow
+
+Upload Resume
+
+↓
+
+Upload Job Description
+
+↓
+
+AI analyzes
+
+↓
+
+Rewrite Resume
+
+Improve
+
+Summary
+
+Experience
+
+Projects
+
+Skills
+
+Achievements
+
+Responsibilities
+
+Use powerful action verbs.
+
+Optimize for ATS.
+
+Keep facts unchanged.
+
+Provide
+
+Original
+
+Optimized
+
+Side-by-side comparison.
+
+Buttons
+
+Rewrite
+
+ATS Optimize
+
+Professional Tone
+
+Leadership Tone
+
+Technical Tone
+
+Entry Level
+
+Senior Level
+
+Download DOCX
+
+Download PDF
+
+==================================================
+FEATURE 5
+PREMIUM AI CHATBOT
+==================================================
+
+Current chatbot should become floating assistant.
+
+Bottom-right floating button.
+
+Click
+
+↓
+
+Slide-in chat panel.
+
+Features
+
+Smooth animation
+
+Typing indicator
+
+Auto scrolling
+
+Suggested prompts
+
+Conversation history
+
+Close
+
+Minimize
+
+Fullscreen
+
+Dark mode
+
+Light mode
+
+Resizable panel
+
+Chatbot can answer
+
+Resume
+
+ATS
+
+Jobs
+
+Interview
+
+Career Roadmap
+
+Salary
+
+Cover Letter
+
+Applications
+
+Recruiter Questions
+
+==================================================
+FEATURE 6
+JOB MATCHING AI
+==================================================
+
+After resume upload
+
+Compare against all jobs.
+
+Generate
+
+Match %
+
+Reasons
+
+Missing Skills
+
+Experience Match
+
+Location Match
+
+Salary Match
+
+Education Match
+
+Sort jobs
+
+Highest Match
+
+↓
+
+Lowest Match
+
+==================================================
+FEATURE 7
+SKILL GAP ANALYSIS
+==================================================
+
+Compare
+
+Resume
+
+vs
+
+Job Description
+
+Generate
+
+Missing Skills
+
+Learning Priority
+
+Difficulty
+
+Estimated Time
+
+Resources
+
+YouTube
+
+Documentation
+
+Courses
+
+Mini Projects
+
+==================================================
+FEATURE 8
+LEARNING ROADMAP
+==================================================
+
+Generate personalized roadmap.
+
+Example
+
+Missing
+
+Docker
+
+Redis
+
+AWS
+
+↓
+
+Roadmap
+
+Week 1
+
+Week 2
+
+Week 3
+
+Projects
+
+Practice Questions
+
+Resources
+
+==================================================
+FEATURE 9
+APPLICATION TRACKER
+==================================================
+
+Track
+
+Applied
+
+Screening
+
+Interview
+
+HR
+
+Offer
+
+Rejected
+
+Withdrawn
+
+Timeline UI
+
+==================================================
+FEATURE 10
+SAVE JOBS
+==================================================
+
+Allow candidates to
+
+Save Job
+
+Remove Saved Job
+
+Saved Jobs Page
+
+==================================================
+FEATURE 11
+EMAIL NOTIFICATIONS
+==================================================
+
+Send email when
+
+New nearby jobs
+
+Application accepted
+
+Application rejected
+
+Interview scheduled
+
+Password reset
+
+OTP
+
+Resume completed
+
+==================================================
+FEATURE 12
+PREMIUM UI
+==================================================
+
+Completely redesign UI.
+
+Modern AI SaaS style.
+
+Rounded cards
+
+Glassmorphism
+
+Gradient buttons
+
+Smooth animations
+
+Framer Motion
+
+Responsive
+
+Desktop
+
+Tablet
+
+Mobile
+
+Improve
+
+Landing Page
+
+Dashboard
+
+Job Cards
+
+Resume Analyzer
+
+Resume Builder
+
+Chatbot
+
+Recruiter Dashboard
+
+Profile
+
+Settings
+
+Application Tracker
+
+Use beautiful empty states.
+
+Skeleton loading.
+
+Animated charts.
+
+==================================================
+FEATURE 13
+ADMIN PANEL
+==================================================
+
+Admin Dashboard
+
+Users
+
+Recruiters
+
+Jobs
+
+Reports
+
+Analytics
+
+Approve Recruiters
+
+Delete Jobs
+
+Manage Companies
+
+View Statistics
+
+==================================================
+GENERAL REQUIREMENTS
+==================================================
+
+Do not remove existing features.
+
+Integrate everything into the current project.
+
+Do not create unnecessary files.
+
+Follow best coding practices.
+
+Optimize database queries.
+
+Implement pagination.
+
+Implement search.
+
+Implement filtering.
+
+Implement sorting.
+
+Validate every API.
+
+Use environment variables.
+
+Write clean reusable code.
+
+Keep everything production-ready.
+
+At the end of implementation, provide:
+
+1. Folder structure changes.
+2. Database schema changes.
+3. New APIs added.
+4. Existing APIs modified.
+5. Frontend pages modified.
+6. Backend files modified.
+7. SQL migrations.
+8. Setup instructions.
+9. Required environment variables.
+10. Testing checklist.
+
+Implement everything step-by-step without breaking the existing application.

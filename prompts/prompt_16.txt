@@ -1,0 +1,23 @@
+Redesign the entire NearHire.AI landing page into a premium AI SaaS interface inspired by Linear, Vercel, Stripe, Notion AI, Lovable, Cursor AI and Perplexity. Keep the existing functionality but completely upgrade the UI/UX.
+
+Design requirements:
+- Full-screen hero with animated Aurora gradient background and subtle particle effects.
+- Add floating glassmorphism cards with blur (backdrop-blur-xl), soft borders and premium shadows.
+- Use a modern color palette (#7C3AED, #4F46E5, #3B82F6, #06B6D4) with dark mode.
+- Replace the current hero with a two-column layout:
+  • Left: Large headline ("Discover Hyperlocal Jobs Powered by AI"), supporting text, CTA buttons.
+  • Right: Interactive 3D dashboard preview showing AI Match Score, Nearby Jobs Map, Resume Analysis, Skill Gap, and Live Notifications.
+- Add animated gradient text, glowing buttons, hover lift effects, smooth transitions using Framer Motion.
+- Replace plain statistics with beautiful metric cards containing icons, animated counters, and glass backgrounds.
+- Add trust section ("Trusted by Students & Recruiters") with company logos.
+- Add feature cards with colorful icons for Resume AI, AI Coach, Hyperlocal Search, Skill Gap Analysis, ATS Scanner, Job Recommendations.
+- Include a live AI chatbot widget preview on the hero.
+- Add curved section dividers and premium spacing throughout.
+- Improve navbar with glass effect, active indicators, animated underline, and profile dropdown.
+- Make buttons large, rounded-xl, gradient-filled with ripple and glow hover effects.
+- Add scroll-triggered animations for every section.
+- Improve typography using Inter or Plus Jakarta Sans with proper font hierarchy.
+- Use a 12-column responsive layout and optimize for mobile, tablet, and desktop.
+- Remove any empty white space and ensure every section feels balanced.
+- Follow accessibility best practices and maintain excellent performance.
+- Keep the existing React + Tailwind CSS + Framer Motion stack without changing application logic or API integration. Only redesign the UI while preserving all functionality.

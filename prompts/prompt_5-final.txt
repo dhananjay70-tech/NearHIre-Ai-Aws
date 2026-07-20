@@ -1,0 +1,389 @@
+from pathlib import Path
+
+prompt = r"""# NearHire.AI v2 — FINAL MASTER IMPLEMENTATION PROMPT
+
+## Mission
+
+Upgrade the existing NearHire.AI monorepo into a complete, stable, premium hackathon-ready **AI Career Intelligence Platform**.
+
+This is the final major implementation run. Work directly inside the existing project, preserve everything that already works, complete the missing functionality, redesign the frontend, run checks, fix errors, and report honestly.
+
+NearHire.AI must answer:
+
+1. Where should I apply?
+2. Why is this job suitable for me?
+3. What should I learn or prepare to improve my chances?
+4. How can I track my progress from discovery to offer?
+
+The final product must feel like a coherent SaaS product, not a collection of unrelated features.
+
+---
+
+# 1. Current Project State — Inspect Before Editing
+
+Existing monorepo:
+
+- `frontend`: React + Vite + Tailwind CSS
+- `node-backend`: Node.js + Express + PostgreSQL
+- `python-backend`: FastAPI
+- Authentication: JWT cookie
+- Node: port 5001
+- Python: port 8000
+- Frontend: port 5173
+- PostgreSQL database: `nearhire_db`
+
+Already working and must remain working:
+
+- Register, login, logout
+- Auth persistence and protected routes
+- Job search and filters
+- Nearby jobs API
+- GPS and manual coordinates
+- Radius search
+- Leaflet/OpenStreetMap map
+- Job details
+- Companies API
+- Skills API
+- Saved jobs
+- Application tracker
+- Dashboard
+- PDF upload
+- Resume text extraction
+- Basic skill extraction
+- Basic job recommendations
+- Basic learning-roadmap, interview-question and cover-letter endpoints
+- Existing database schema and seed data
+
+Before modifying anything:
+
+1. Inspect the actual project tree and current files.
+2. Read existing API response shapes.
+3. Reuse current services, repositories, controllers, middleware, components and utilities.
+4. Modify only what is needed.
+5. Never replace a working file with a placeholder.
+6. Never remove working business logic merely to simplify implementation.
+7. Preserve backward compatibility wherever practical.
+8. Do not claim completion until checks are actually run.
+
+Use JavaScript for React and Node. Use Python for FastAPI. Do not introduce TypeScript.
+
+---
+
+# 2. Non-Negotiable Engineering Rules
+
+- No random scores.
+- No fabricated skills, education, experience, projects, salary trends, company ratings, hiring trends or commute traffic.
+- No fake buttons.
+- No hardcoded frontend job arrays.
+- No second authentication system in Python.
+- No raw PDF storage by default.
+- No JWT storage in localStorage/sessionStorage.
+- No hardcoded secrets.
+- No stack traces in production API responses.
+- No paid API dependency for the core demo.
+- Gemini must be optional.
+- Core resume parsing, deterministic matching, roadmaps, questions, cover-letter fallback, feedback and checklist must work without Gemini.
+- Use parameterized SQL.
+- Enforce user ownership for saved jobs and applications.
+- Preserve standard JSON response formats.
+- Keep demo-source labels visible.
+- Every important user action must provide loading, success, duplicate, empty and failure feedback.
+
+---
+
+# 3. Product Positioning and Original UI Reference
+
+Position NearHire.AI as:
+
+**“An AI Career Intelligence Platform for discovering nearby opportunities, understanding fit, closing skill gaps, preparing for interviews and tracking applications.”**
+
+Use JobOrbit.ai only as inspiration for:
+
+- strong hero hierarchy
+- concise value proposition
+- clear “how it works” storytelling
+- visible product status/activity presentation
+- feature grouping
+- confident SaaS spacing
+- premium dark interface accents
+- compact metrics
+- clear calls to action
+
+Do not copy its branding, text, assets, exact colors, layouts, illustrations, pricing sections, source code or auto-apply claims.
+
+NearHire.AI must have its own identity:
+
+- Deep navy base accents
+- Electric indigo and violet brand gradient
+- Cyan highlights
+- Soft neutral page backgrounds
+- Premium white/glass cards
+- Strong typography and whitespace
+- Original copy focused on hyperlocal discovery and career preparation
+
+---
+
+# 4. Complete Product Journey
+
+The complete local flow must work:
+
+Register/Login  
+→ Set location or city  
+→ Search nearby jobs  
+→ View jobs in list/map  
+→ Open job details  
+→ Select job for analysis  
+→ Upload PDF resume  
+→ Extract structured candidate profile  
+→ Calculate selected-job match  
+→ Generate location-aware ranked recommendations  
+→ Explain fit and risks  
+→ Generate 14/30/60/90-day plan  
+→ Generate technical/project/behavioural/HR questions  
+→ Generate cover letter  
+→ Generate resume feedback  
+→ Generate preparation checklist  
+→ Save job  
+→ Record application and open official source  
+→ Track status  
+→ View real dashboard activity
+
+---
+
+# 5. Human-Friendly Job IDs
+
+Do not alter PostgreSQL UUID primary keys.
+
+Every formatted job response must include:
+
+- `id`: original UUID
+- `displayJobId`
+
+Format:
+
+`NH-<last 8 alphanumeric UUID characters in uppercase>`
+
+Example:
+
+`22222222-0000-0000-0000-000000000005` → `NH-00000005`
+
+Show `displayJobId` on:
+
+- Search cards
+- Map popup
+- Job details
+- Resume job selector
+- Recommendation cards
+- Saved jobs
+- Applications
+- Dashboard activity
+
+Job Details must support:
+
+- Copy display job ID
+- Copy full UUID under an advanced section
+- Share link via `navigator.share`
+- Clipboard fallback
+
+---
+
+# 6. Search and Hyperlocal Discovery
+
+Preserve current search APIs and improve safely.
+
+Support filters:
+
+- keyword/title/company/description
+- skill
+- city
+- state
+- address
+- postal code/PIN
+- job type
+- work mode
+- minimum salary
+- maximum experience
+- radius
+- sort by newest, salary, title and distance
+
+Location methods:
+
+- Browser GPS
+- Manual latitude/longitude
+- City
+- Address
+- PIN code
+
+Radius options:
+
+- 5 km
+- 10 km
+- 20 km
+- 50 km
+- 100 km
+
+Requirements:
+
+- `Sohna`, `Sohna, Haryana` and similar city inputs must work.
+- GPS denial must not block normal search.
+- Clear Filters must immediately reload all jobs.
+- Radius changes must refresh nearby results.
+- Active filters must appear as removable chips.
+- Explain AND-filter behaviour when zero results appear.
+- Offer actions such as remove skill, remove city, increase radius and show all jobs.
+- Preserve pagination.
+- Map/list toggle must remain functional.
+- Do not disable city search unless GPS nearby mode is active.
+- Remote jobs must not be unfairly penalized by physical distance.
+
+---
+
+# 7. Deterministic Smart Search Parser
+
+Add a lightweight deterministic parser for phrases such as:
+
+- `React internship in Gurugram`
+- `Remote Node.js job`
+- `Frontend internship within 20 km`
+- `Python fresher role near Noida`
+- `Hybrid backend under 50 km`
+
+Extract where possible:
+
+- keyword
+- skill
+- city
+- job type
+- work mode
+- radius
+- fresher/experience hint
+
+Show parsed values as editable/removable chips.
+
+Do not require Gemini.
+
+Never silently override manually selected filters.
+
+---
+
+# 8. Address/PIN Geocoding
+
+If address or PIN geocoding is implemented:
+
+- Use Nominatim through the backend, not directly on every React render.
+- Respect rate limits.
+- Add simple caching.
+- Use a meaningful user agent.
+- Provide timeout and readable failure states.
+- Preserve manual coordinates as fallback.
+- Do not make geocoding mandatory for normal city search.
+
+---
+
+# 9. Map and Commute Intelligence
+
+Preserve React Leaflet and OpenStreetMap.
+
+Map:
+
+- User marker
+- Job markers
+- Radius circle
+- Auto-fit bounds
+- Selected-job highlight
+- Valid-coordinate filtering
+- Empty-safe rendering
+- Responsive height
+
+Popup:
+
+- title
+- company
+- display job ID
+- city
+- salary
+- distance
+- View Details
+- Directions
+
+Directions may open:
+
+`https://www.google.com/maps/dir/?api=1&destination=<lat>,<lng>`
+
+Commute:
+
+- Use actual Haversine distance.
+- If no routing API exists, provide clearly labelled estimates only.
+- Example deterministic assumptions:
+  - car: distance / 30 km/h
+  - two-wheeler: distance / 25 km/h
+  - public transport: distance / 18 km/h + wait buffer
+- Label: `Estimated commute — not live traffic data`.
+- Do not fabricate route or traffic information.
+
+---
+
+# 10. Structured Resume Analysis
+
+Complete:
+
+`POST /api/resume/analyze`
+
+Multipart fields:
+
+- `file`
+- optional `jobId`
+- optional `latitude`
+- optional `longitude`
+- optional `radiusKm`
+
+Rules:
+
+- PDF only
+- max 5 MB
+- reject empty/corrupted/encrypted PDFs cleanly
+- extract with PyMuPDF
+- no permanent raw PDF storage by default
+- invalid UUID → 400
+- missing job → 404
+- Node unavailable → 503
+- no generic 500 for expected validation errors
+
+Return:
+
+```json
+{
+  "success": true,
+  "data": {
+    "fileName": "",
+    "summary": "",
+    "extractedSkills": [],
+    "normalizedSkills": [],
+    "education": [],
+    "experienceHints": [],
+    "projects": [],
+    "certifications": [],
+    "contactHints": {
+      "emailFound": false,
+      "phoneFound": false,
+      "linkedinFound": false,
+      "githubFound": false,
+      "portfolioFound": false
+    },
+    "resumeCompleteness": {
+      "score": 0,
+      "label": "Resume completeness estimate",
+      "components": {
+        "contact": 0,
+        "skills": 0,
+        "education": 0,
+        "projects": 0,
+        "experience": 0
+      },
+      "strengths": [],
+      "missingSections": [],
+      "suggestions": []
+    },
+    "selectedJobMatch": null
+  }
+}

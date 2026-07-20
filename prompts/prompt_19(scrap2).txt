@@ -1,0 +1,76 @@
+BUG FIX
+
+The Job Scraper is returning jobs from every city.
+
+Example
+
+User searches
+
+location=Mumbai
+
+Current Result
+
+Mumbai
+Bangalore
+Delhi
+Noida
+Pune
+Chennai
+
+This is incorrect.
+
+Fix the Aggregator.
+
+After collecting jobs from all providers,
+
+apply location filtering.
+
+Matching should be case-insensitive.
+
+Normalize city names.
+
+Examples
+
+Mumbai
+Navi Mumbai
+Thane
+Powai
+Andheri
+Bandra
+Borivali
+
+should all match Mumbai.
+
+But
+
+Delhi
+Noida
+Bangalore
+Chennai
+Pune
+
+must be removed.
+
+Filtering should work on
+
+city
+
+location
+
+state
+
+country
+
+Use fuzzy matching where appropriate.
+
+The returned jobs array must contain ONLY jobs matching the requested location.
+
+Do not modify frontend, backend, or python-backend.
+
+Modify only files inside job-scraper.
+
+After fixing, searching
+
+/jobs/search?q=java&location=Mumbai
+
+should never return Bangalore or Delhi jobs.

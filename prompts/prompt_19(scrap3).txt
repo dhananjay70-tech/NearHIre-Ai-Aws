@@ -1,0 +1,426 @@
+Frontend (React)
+        │
+        ▼
+Node Backend (MS1)
+        │
+        ├────────► PostgreSQL
+        │
+        ├────────► Python Backend (MS2)
+        │
+        └────────► Job Scraper (MS3)
+                     │
+                     ├── JSearch API
+                     ├── LinkedIn
+                     ├── Internshala
+                     ├── Greenhouse
+                     ├── Lever
+                     └── Other Providers
+
+
+
+
+You are a Senior Software Architect.
+
+Analyze my ENTIRE repository before making any changes.
+
+Current project structure
+
+root/
+
+backend/            → MS1 (Node.js)
+
+python-backend/     → MS2 (FastAPI AI)
+
+frontend/           → React
+
+job-scraper/        → Independent Job Aggregation Service
+
+=======================================================
+
+IMPORTANT
+
+The job-scraper is COMPLETE.
+
+DO NOT move its code.
+
+DO NOT copy scraper logic into backend.
+
+DO NOT copy scraper logic into python-backend.
+
+The scraper must remain an independent microservice.
+
+=======================================================
+
+YOUR TASK
+
+Integrate the existing Job Scraper with
+
+1. backend (MS1)
+
+2. python-backend (MS2)
+
+without moving any scraper code.
+
+Communication must happen through REST APIs.
+
+=======================================================
+
+ARCHITECTURE
+
+Frontend
+
+↓
+
+Node Backend (MS1)
+
+↓
+
+Job Scraper
+
+↓
+
+Job APIs
+
+↓
+
+Scrapers
+
+↓
+
+Return Jobs
+
+↓
+
+MS1
+
+↓
+
+Frontend
+
+-------------------------------------------------------
+
+AI Flow
+
+Resume Upload
+
+↓
+
+MS2
+
+↓
+
+Call Job Scraper
+
+↓
+
+Receive Real Jobs
+
+↓
+
+ATS Score
+
+Resume Match
+
+Skill Gap
+
+Roadmap
+
+Interview Questions
+
+=======================================================
+
+STEP 1
+
+Create a Job Scraper Client inside backend
+
+backend/
+
+services/
+
+jobScraperService.js
+
+This service should call
+
+GET http://localhost:8100/jobs
+
+GET http://localhost:8100/jobs/search
+
+GET http://localhost:8100/jobs/latest
+
+GET http://localhost:8100/health
+
+Never scrape inside backend.
+
+=======================================================
+
+STEP 2
+
+Replace every dummy job source inside backend.
+
+Find
+
+dummyJobs
+
+mockJobs
+
+sampleJobs
+
+jobs.json
+
+hardcoded arrays
+
+temporary jobs
+
+Replace all of them with calls to Job Scraper.
+
+=======================================================
+
+STEP 3
+
+Backend APIs
+
+Existing APIs must continue working.
+
+Internally they should call Job Scraper.
+
+Example
+
+Frontend
+
+↓
+
+GET /api/jobs/search
+
+↓
+
+backend
+
+↓
+
+GET http://localhost:8100/jobs/search
+
+↓
+
+Return response.
+
+=======================================================
+
+STEP 4
+
+Python Backend
+
+Create
+
+python-backend/
+
+app/
+
+services/
+
+job_scraper_client.py
+
+Use httpx.
+
+Create functions
+
+search_jobs()
+
+latest_jobs()
+
+get_job()
+
+health()
+
+=======================================================
+
+STEP 5
+
+Resume Matching
+
+Current flow
+
+Resume
+
+↓
+
+Dummy Jobs
+
+↓
+
+Matching
+
+Replace
+
+Dummy Jobs
+
+with
+
+Job Scraper.
+
+=======================================================
+
+STEP 6
+
+ATS
+
+Interview Questions
+
+Roadmap
+
+Recommendations
+
+All should use REAL jobs from Job Scraper.
+
+=======================================================
+
+STEP 7
+
+Frontend
+
+DO NOT call Job Scraper directly.
+
+Frontend should continue talking ONLY to backend.
+
+=======================================================
+
+STEP 8
+
+Environment Variables
+
+Backend
+
+JOB_SCRAPER_URL=http://localhost:8100
+
+Python Backend
+
+JOB_SCRAPER_URL=http://localhost:8100
+
+Never hardcode URLs.
+
+=======================================================
+
+STEP 9
+
+Error Handling
+
+If Job Scraper is down
+
+Return
+
+503 Service Unavailable
+
+Never return dummy jobs.
+
+Never generate fake jobs.
+
+=======================================================
+
+STEP 10
+
+Caching
+
+Backend should cache Job Scraper responses for
+
+5 minutes
+
+using Redis or in-memory cache.
+
+=======================================================
+
+STEP 11
+
+Health Checks
+
+Backend startup
+
+↓
+
+Check
+
+GET /health
+
+If unavailable
+
+Log warning
+
+Continue startup.
+
+=======================================================
+
+STEP 12
+
+Logging
+
+Log
+
+Search request
+
+Provider response time
+
+Number of jobs
+
+Errors
+
+Retries
+
+=======================================================
+
+STEP 13
+
+Do NOT modify
+
+job-scraper/
+
+except if absolutely necessary.
+
+Treat it as an external microservice.
+
+=======================================================
+
+STEP 14
+
+At the end generate a migration report.
+
+Show
+
+✔ Files modified in backend
+
+✔ Files modified in python-backend
+
+✔ Files modified in frontend
+
+✔ New services created
+
+✔ APIs connected
+
+✔ Dummy data removed
+
+✔ Communication flow
+
+✔ Sequence diagram
+
+✔ Environment variables added
+
+✔ Testing steps
+
+=======================================================
+
+FINAL REQUIREMENTS
+
+✔ Frontend only communicates with backend.
+
+✔ Backend communicates with Job Scraper.
+
+✔ Python Backend communicates with Job Scraper.
+
+✔ Job Scraper remains a separate microservice.
+
+✔ No scraper code duplicated.
+
+✔ No dummy jobs remain.
+
+✔ Existing features continue working.
+
+✔ Resume matching, ATS scoring, recommendations, and interview preparation all use live jobs fetched from the Job Scraper.
+
+Do not stop until the integration is fully complete and verified.                     

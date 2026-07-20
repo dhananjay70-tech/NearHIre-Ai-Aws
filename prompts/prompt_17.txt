@@ -1,0 +1,212 @@
+Completely redesign the NearHire.AI frontend into a world-class premium AI SaaS platform inspired by Apple, Linear, Vercel, Cursor AI, Lovable, Perplexity, Stripe, Notion AI, and Raycast while preserving all existing functionality, routing, authentication, APIs, and business logic. Do not modify backend logic—only transform the UI/UX into a modern, premium, production-quality interface.
+
+GENERAL DESIGN
+- Create a luxurious AI SaaS aesthetic with dark mode as default.
+- Use a modern color palette:
+  - Primary: #7C3AED
+  - Secondary: #4F46E5
+  - Accent: #06B6D4
+  - Background: #09090B
+- Add Aurora animated gradients, glassmorphism, subtle noise texture, radial spotlight following the cursor, animated particles, blurred glowing blobs, premium shadows, and soft lighting effects.
+- Use a 12-column responsive grid with excellent spacing and visual hierarchy.
+- Optimize for desktop, tablet, and mobile.
+
+NAVBAR
+- Replace the current navbar with a floating glassmorphism navbar.
+- Rounded-2xl corners.
+- Backdrop blur with transparent background.
+- Premium shadow and subtle animated border.
+- Navbar slightly shrinks while scrolling.
+- Active menu should have a glowing pill indicator.
+- Animated underline on hover.
+- Add Lucide icons beside every navigation item.
+- Add a beautiful notification bell with unread badge.
+- Add Command Palette button (⌘K / Ctrl+K).
+- Improve the profile dropdown with:
+  • Avatar
+  • User information
+  • Dashboard
+  • Settings
+  • Notifications
+  • Theme switch
+  • Logout
+- Create a premium animated mobile menu.
+
+LOGO
+- Completely redesign the NearHire.AI logo.
+- Replace the simple "N" icon with a memorable AI startup identity.
+- Design an original logo inspired by modern SaaS companies (without copying any existing brand).
+- The logo should represent:
+  • AI
+  • Hyperlocal jobs
+  • Career growth
+  • Location
+  • Neural intelligence
+- Use a modern geometric symbol with gradients (#7C3AED → #4F46E5 → #06B6D4).
+- Create:
+  • Full logo (icon + NearHire.AI)
+  • Icon-only version
+  • Favicon version
+  • Monochrome version
+  • Animated SVG version
+  • Loading spinner using the logo
+- Add glow animation and hover interaction in the navbar.
+
+HERO SECTION
+- Remove unnecessary empty space.
+- Perfectly balance the layout.
+- Create a premium two-column hero.
+
+LEFT SIDE
+- Animated badge:
+  "AI Hyperlocal Career Platform"
+- Huge gradient headline with animated word switching.
+- Better supporting description.
+- Two premium CTA buttons:
+  • Search Local Jobs
+  • Go to Dashboard
+- Add trust badges.
+- Add student & recruiter count.
+- Add company logos.
+
+RIGHT SIDE
+- Create a beautiful AI dashboard preview containing:
+  • Resume Match Score
+  • Nearby Jobs Map
+  • Resume Analysis
+  • Skill Gap Analysis
+  • AI Coach Chat
+  • Live notifications
+  • Recent recommendations
+  • Interactive graphs
+  • Floating glass cards
+- Add mouse parallax movement.
+- Add floating animations.
+
+BUTTONS
+- Large rounded buttons.
+- Gradient background.
+- Glow hover.
+- Ripple click animation.
+- Magnetic hover effect.
+- Smooth Framer Motion animations.
+
+TYPOGRAPHY
+- Use Plus Jakarta Sans or Inter.
+- Improve hierarchy.
+- Better spacing.
+- Larger headings.
+- Cleaner body text.
+- Premium font weights.
+
+ANIMATIONS
+- Use Framer Motion everywhere.
+- Stagger animations.
+- Fade-up on scroll.
+- Slide transitions.
+- Floating cards.
+- Number counters.
+- Micro interactions.
+- Smooth hover animations.
+- Spring transitions.
+- Premium page transitions.
+
+FEATURE SECTIONS
+Redesign every section with premium cards.
+
+Include:
+- AI Resume Analysis
+- Hyperlocal Job Discovery
+- AI Career Coach
+- ATS Resume Scanner
+- Skill Gap Detection
+- Personalized Recommendations
+- Interview Preparation
+- Resume Builder
+- Saved Jobs
+- Live Notifications
+
+Each feature card should include:
+- Glass background
+- Premium colorful icon
+- Hover lift
+- Glow border
+- Animated background
+
+SOCIAL PROOF
+Add:
+- Trusted by Students & Recruiters
+- Company logos
+- Success metrics
+- Testimonials
+- User reviews
+- Animated counters
+
+DASHBOARD PREVIEW
+Completely redesign dashboard widgets.
+Include:
+- AI Score
+- Nearby Jobs
+- Skills Radar
+- Resume Completion
+- Application Tracker
+- Interview Progress
+- Weekly Analytics
+- Career Timeline
+- AI Suggestions
+- Recent Activities
+
+CARDS
+All cards should use:
+- Glassmorphism
+- Soft borders
+- Rounded corners
+- Hover glow
+- Premium shadows
+- Floating animation
+
+BACKGROUND
+Use:
+- Animated Aurora gradients
+- Grid overlay
+- Soft spotlight
+- Floating particles
+- Blurred neon lights
+- Premium depth effects
+
+FOOTER
+Redesign the footer with:
+- Multi-column layout
+- Newsletter
+- Social icons
+- Contact information
+- Product links
+- Resources
+- Copyright
+- Beautiful gradient separator
+
+RESPONSIVE
+Ensure pixel-perfect responsiveness across:
+- Mobile
+- Tablet
+- Laptop
+- Desktop
+- Ultra-wide screens
+
+PERFORMANCE
+- Lazy load heavy components.
+- Optimize animations.
+- Maintain accessibility (WCAG).
+- Preserve all API integrations and backend functionality.
+- Do not break authentication, routing, state management, or business logic.
+
+TECH STACK
+Use only:
+- React.js
+- Tailwind CSS
+- Framer Motion
+- Lucide React Icons
+- Modern CSS
+- Existing project architecture
+
+The final result should look like a premium AI startup website that could compete visually with Cursor AI, Lovable, Linear, Vercel, Perplexity, and Stripe, while keeping NearHire.AI's unique identity and preserving all existing functionality.

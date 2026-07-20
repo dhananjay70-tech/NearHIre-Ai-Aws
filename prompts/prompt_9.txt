@@ -1,0 +1,100 @@
+You are a senior React + Vite + Tailwind CSS engineer.
+
+The Dark/Light theme implementation is currently broken.
+
+Current issue:
+- The application becomes completely black after adding the theme system.
+- Console shows:
+  "useTheme must be used within a ThemeProvider"
+- ThemeToggle crashes because ThemeProvider is not properly configured.
+
+Your task is to FIX the existing implementation without breaking the project.
+
+Requirements:
+
+1. Find the current ThemeContext, ThemeProvider, ThemeToggle, and theme-related files.
+
+2. Ensure ThemeProvider wraps the entire application in main.jsx/main.tsx.
+
+3. Do NOT create duplicate ThemeProviders or duplicate contexts.
+
+4. Fix all imports and exports.
+
+5. If ThemeContext is incorrect, rewrite it using React Context API.
+
+6. ThemeProvider must:
+   - store theme state
+   - support light mode
+   - support dark mode
+   - support system theme
+   - save preference in localStorage
+   - restore preference on reload
+   - detect prefers-color-scheme
+   - update document.documentElement.classList
+   - avoid flash of incorrect theme
+
+7. ThemeToggle must:
+   - use useTheme()
+   - never crash
+   - display Sun icon in dark mode
+   - display Moon icon in light mode
+   - animate smoothly
+   - use lucide-react icons
+
+8. Tailwind must use:
+   darkMode: "class"
+
+9. Replace hardcoded colors with Tailwind dark variants:
+
+Light:
+bg-white
+text-gray-900
+border-gray-200
+
+Dark:
+dark:bg-zinc-950
+dark:text-white
+dark:border-zinc-800
+
+10. Update every major component:
+- Navbar
+- Sidebar
+- Dashboard
+- Cards
+- Forms
+- Inputs
+- Buttons
+- Tables
+- Modals
+- Dropdowns
+
+11. Remove any code that permanently forces:
+
+document.documentElement.classList.add("dark")
+
+or
+
+<body class="dark">
+
+unless controlled by ThemeProvider.
+
+12. Remove duplicate theme implementations.
+
+13. Remove unused ThemeContext files if duplicates exist.
+
+14. Preserve existing UI and functionality.
+
+15. Ensure the application starts without any console errors.
+
+16. Verify:
+- No "useTheme must be used within ThemeProvider" error.
+- No blank black screen.
+- Theme persists after refresh.
+- Toggle works on every page.
+- No hydration or rendering errors.
+
+17. At the end, provide a summary of:
+- Files modified
+- Files removed
+- Files created
+- Any remaining issues

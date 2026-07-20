@@ -1,0 +1,411 @@
+You are a Senior Python Backend Engineer and Web Scraping Expert.
+
+Analyze my repository first.
+
+Current folder structure:
+
+root/
+├── backend/
+├── frontend/
+├── python-backend/
+├── job-scraper/
+├── docs/
+├── prompts/
+
+======================================================
+
+VERY IMPORTANT
+
+For this task you are ONLY allowed to work inside
+
+/job-scraper
+
+DO NOT modify
+
+❌ backend/
+❌ frontend/
+❌ python-backend/
+
+Do NOT create files outside job-scraper.
+
+Do NOT change any existing code.
+
+Do NOT integrate with any backend yet.
+
+The goal is ONLY to build and test the Job Scraper microservice.
+
+======================================================
+
+The job-scraper should become a completely independent service.
+
+Create a production-ready structure like:
+
+job-scraper/
+
+    app/
+
+        api/
+            routes.py
+
+        providers/
+
+            jsearch.py
+            adzuna.py
+            jooble.py
+            rapidapi.py
+            arbeitnow.py
+            remoteok.py
+
+        scrapers/
+
+            linkedin.py
+            internshala.py
+            indeed.py
+            naukri.py
+            wellfound.py
+            greenhouse.py
+            lever.py
+            company_pages.py
+
+        services/
+
+            aggregator.py
+            normalizer.py
+            deduplicator.py
+            geocoder.py
+            cache.py
+
+        scheduler/
+
+            cron.py
+
+        database/
+
+            postgres.py
+
+        models/
+
+            job.py
+
+        utils/
+
+            logger.py
+            helpers.py
+
+        config.py
+
+        main.py
+
+    tests/
+
+    logs/
+
+    requirements.txt
+
+    Dockerfile
+
+    docker-compose.yml
+
+    .env.example
+
+    README.md
+
+======================================================
+
+Goal
+
+This service must collect REAL jobs.
+
+Never generate dummy jobs.
+
+Never return placeholder jobs.
+
+Never return mock jobs.
+
+======================================================
+
+Priority 1
+
+Use APIs.
+
+Use as many FREE or FREEMIUM job APIs as possible.
+
+Examples
+
+JSearch API
+
+Adzuna API
+
+Jooble API
+
+Arbeitnow API
+
+RemoteOK API
+
+RapidAPI Job Search APIs
+
+Greenhouse Job Board API
+
+Lever Job Board API
+
+USAJobs API
+
+Find additional public job APIs if useful.
+
+======================================================
+
+Priority 2
+
+If an official API does not exist,
+
+then implement web scraping.
+
+Examples
+
+LinkedIn Jobs
+
+Internshala
+
+Indeed
+
+Naukri
+
+Wellfound
+
+Company Career Pages
+
+======================================================
+
+Every provider must return a common schema.
+
+Job Schema
+
+title
+
+company
+
+location
+
+latitude
+
+longitude
+
+salary
+
+currency
+
+experience
+
+skills
+
+description
+
+employmentType
+
+remote
+
+hybrid
+
+onsite
+
+companyLogo
+
+companyWebsite
+
+applyUrl
+
+source
+
+postedDate
+
+industry
+
+category
+
+education
+
+city
+
+state
+
+country
+
+pincode
+
+======================================================
+
+Create
+
+Aggregator Service
+
+The Aggregator should
+
+Call every provider
+
+Collect all jobs
+
+Normalize data
+
+Remove duplicates
+
+Validate required fields
+
+Return one clean list.
+
+======================================================
+
+Duplicate Detection
+
+Remove duplicates using
+
+Company
+
+Title
+
+Location
+
+Apply URL
+
+Description Similarity
+
+======================================================
+
+Implement
+
+Redis cache support
+
+Retry mechanism
+
+Rate limiting
+
+User-Agent rotation
+
+Timeout handling
+
+Logging
+
+Structured error handling
+
+======================================================
+
+Scheduler
+
+Create cron scheduler.
+
+Every 30 minutes
+
+Refresh jobs
+
+Save only new jobs
+
+Mark expired jobs
+
+======================================================
+
+Expose REST APIs
+
+GET /health
+
+GET /jobs
+
+GET /jobs/search
+
+GET /jobs/source/{provider}
+
+GET /jobs/latest
+
+GET /jobs/company/{company}
+
+GET /jobs/location/{city}
+
+GET /jobs/skills/{skill}
+
+======================================================
+
+For now,
+
+the APIs should return live data directly from providers.
+
+Backend integration will happen later.
+
+======================================================
+
+Use
+
+FastAPI
+
+httpx
+
+aiohttp
+
+BeautifulSoup
+
+Playwright (when JavaScript rendering is required)
+
+lxml
+
+Pydantic
+
+SQLAlchemy (or PostgreSQL-ready layer)
+
+Redis
+
+APScheduler
+
+======================================================
+
+Environment Variables
+
+Store every API key inside
+
+.env.example
+
+Examples
+
+JSEARCH_API_KEY=
+
+ADZUNA_APP_ID=
+
+ADZUNA_APP_KEY=
+
+JOOBLE_API_KEY=
+
+RAPIDAPI_KEY=
+
+======================================================
+
+README
+
+Explain
+
+Architecture
+
+Folder structure
+
+Provider flow
+
+Aggregator flow
+
+Scheduler flow
+
+API documentation
+
+How to add new providers
+
+======================================================
+
+Before finishing,
+
+verify that
+
+✔ No code was written outside /job-scraper
+
+✔ No backend files changed
+
+✔ No frontend files changed
+
+✔ No AI backend files changed
+
+Only the job-scraper folder should contain new code.
+
+Generate a final report listing every file created inside job-scraper.

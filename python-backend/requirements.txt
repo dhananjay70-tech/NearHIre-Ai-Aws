@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+python-multipart
+pydantic
+httpx
+pymupdf
+PyJWT
+langgraph
+langchain
+langchain-google-genai
+asyncpg

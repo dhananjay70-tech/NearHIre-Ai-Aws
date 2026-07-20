@@ -1,0 +1,27 @@
+# Independent stack for the job-scraper service.
+# Redis is optional — remove it and leave REDIS_URL empty to use the
+# in-memory cache fallback.
+
+services:
+  job-scraper:
+    build: .
+    container_name: nearhire-job-scraper
+    ports:
+      - "8100:8100"
+    env_file:
+      - .env
+    environment:
+      # Point at the bundled Redis by default; override in .env if needed.
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+    depends_on:
+      - redis
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+
+  redis:
+    image: redis:7-alpine
+    container_name: nearhire-scraper-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped

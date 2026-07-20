@@ -1,0 +1,416 @@
+You are a Senior Full Stack Engineer.
+
+Project: NearHire.AI
+Current Stack:
+- Frontend: React + Vite + Tailwind CSS
+- Backend: Node.js + Express
+- AI Backend: FastAPI
+- Database: PostgreSQL
+- Maps: OpenStreetMap + Leaflet
+- Authentication: JWT
+
+====================================================
+OBJECTIVE
+====================================================
+
+The project currently displays hardcoded/dummy job data.
+
+Replace the dummy data with REAL job data collected from publicly available job sources that permit scraping or provide official APIs/feeds.
+
+Do NOT change the UI design.
+
+Only replace the data source.
+
+====================================================
+SCRAPING SOURCES
+====================================================
+
+Use only sources that allow scraping or expose public job listings.
+
+Priority:
+
+1. Company Career Pages
+2. Greenhouse hosted jobs
+3. Lever hosted jobs
+4. Ashby job boards
+5. Public Workday job listings (where publicly accessible)
+6. Government employment portals
+7. RSS/XML/JSON job feeds when available
+
+Avoid scraping websites that prohibit automated scraping in their Terms of Service.
+
+====================================================
+CREATE NEW MODULE
+====================================================
+
+node-backend/
+    src/
+        scrapers/
+            index.js
+            greenhouse.js
+            lever.js
+            careers.js
+            parser.js
+            scheduler.js
+
+====================================================
+JOB DATA MODEL
+====================================================
+
+Every scraper should normalize data into:
+
+{
+    id,
+    title,
+    company,
+    location,
+    city,
+    state,
+    country,
+    latitude,
+    longitude,
+    salary,
+    experience,
+    employmentType,
+    workMode,
+    description,
+    skills,
+    logo,
+    applyUrl,
+    source,
+    postedDate,
+    scrapedAt
+}
+
+====================================================
+DATABASE
+====================================================
+
+Create migration if necessary.
+
+Table:
+
+jobs
+
+Columns:
+
+id
+title
+company
+location
+city
+state
+country
+latitude
+longitude
+salary
+experience
+employment_type
+work_mode
+description
+skills
+logo_url
+apply_url
+source
+posted_date
+scraped_at
+
+====================================================
+SCRAPER PIPELINE
+====================================================
+
+Every scraper should:
+
+Download page
+
+↓
+
+Extract jobs
+
+↓
+
+Normalize data
+
+↓
+
+Remove duplicates
+
+↓
+
+Geocode address
+
+↓
+
+Store in PostgreSQL
+
+====================================================
+GEOLOCATION
+====================================================
+
+Convert every job location into latitude & longitude using:
+
+OpenStreetMap Nominatim API
+
+Store coordinates in database.
+
+====================================================
+CRON JOB
+====================================================
+
+Use node-cron.
+
+Run every hour.
+
+Update only new jobs.
+
+Remove expired jobs.
+
+====================================================
+API
+====================================================
+
+Create REST APIs:
+
+GET /jobs
+
+GET /jobs/:id
+
+GET /jobs/search
+
+GET /jobs/nearby
+
+GET /jobs/company/:company
+
+GET /jobs/recommended
+
+====================================================
+SEARCH
+====================================================
+
+Support filters:
+
+keyword
+
+location
+
+radius
+
+salary
+
+experience
+
+company
+
+skills
+
+employment type
+
+remote/hybrid/on-site
+
+====================================================
+FRONTEND
+====================================================
+
+Remove ALL dummy jobs.
+
+Do NOT hardcode jobs anywhere.
+
+Every page must consume backend APIs.
+
+Update:
+
+Home
+
+Search
+
+Nearby Jobs
+
+Saved Jobs
+
+Job Details
+
+Recommendations
+
+====================================================
+JOB DETAILS PAGE
+====================================================
+
+Instead of
+
+Official Application Link
+
+Display
+
+Apply on Official Website
+
+Clicking should open
+
+job.applyUrl
+
+in a new browser tab.
+
+Show
+
+Source
+
+Example
+
+Greenhouse
+
+Lever
+
+Company Careers
+
+====================================================
+AI
+====================================================
+
+FastAPI should analyze
+
+description
+
+skills
+
+title
+
+Generate:
+
+Required skills
+
+Resume match score
+
+Skill gaps
+
+Career DNA
+
+====================================================
+DISTANCE
+====================================================
+
+Distance must be calculated using
+
+candidate coordinates
+
++
+
+job coordinates
+
+using Haversine formula.
+
+====================================================
+PERFORMANCE
+====================================================
+
+Use
+
+axios
+
+cheerio
+
+playwright only if JavaScript rendering is required.
+
+Otherwise prefer cheerio.
+
+Use concurrency with limits.
+
+Retry failed requests.
+
+Log failures.
+
+====================================================
+ERROR HANDLING
+====================================================
+
+If one scraper fails
+
+Continue remaining scrapers.
+
+Never crash the backend.
+
+====================================================
+SECURITY
+====================================================
+
+Validate URLs.
+
+Sanitize HTML.
+
+Prevent SQL injection.
+
+Escape scraped content.
+
+====================================================
+REMOVE
+====================================================
+
+Delete
+
+dummy jobs
+
+mock jobs
+
+fake companies
+
+placeholder URLs
+
+dummy logos
+
+hardcoded salary
+
+hardcoded location
+
+====================================================
+FINAL RESULT
+====================================================
+
+When I open NearHire AI
+
+I should see
+
+REAL jobs
+
+from supported public sources.
+
+Every job should include:
+
+Company
+
+Logo
+
+Salary (if available)
+
+Location
+
+Experience
+
+Skills
+
+Description
+
+Apply URL
+
+Distance
+
+AI Resume Analysis
+
+====================================================
+OUTPUT
+====================================================
+
+1. Implement complete scraping pipeline.
+
+2. Replace dummy data everywhere.
+
+3. Keep existing UI.
+
+4. Show every modified file.
+
+5. Explain how to run:
+
+npm install
+
+npm run scrape
+
+npm run dev
+
+6. Ensure the project builds successfully with no errors.
