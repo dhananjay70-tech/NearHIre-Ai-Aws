@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# NearHire.AI
+
+# NearHire.AI (nearhire.online)
 
 An AI-powered hyperlocal job discovery platform — connecting job seekers with opportunities near them.
 
