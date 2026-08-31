@@ -7,7 +7,7 @@ Refactor and improve the existing codebase.
 
 ===================================================
 PRIMARY GOAL
-===================================================
+==================================================
 
 Remove every piece of dummy data from the project.
 
