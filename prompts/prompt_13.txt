@@ -5,7 +5,7 @@ Upgrade my existing NearHire AI project into a production-ready AI Career Coach 
 DO NOT create a new project.
 Refactor and improve the existing codebase.
 
-====================================================
+===================================================
 PRIMARY GOAL
 ====================================================
 
