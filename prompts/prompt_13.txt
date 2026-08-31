@@ -15,7 +15,7 @@ Replace hardcoded jobs, companies, recommendations, dashboards and statistics wi
 
 The platform should work with real jobs collected automatically from public APIs and publicly accessible company career pages (where permitted).
 
-====================================================
+===================================================
 AI CAREER COACH
 ====================================================
 
